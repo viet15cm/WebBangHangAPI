@@ -14,7 +14,7 @@ namespace WebBanHangAPI.Models.JoinModel
         
         public int SoLuong { get; set; }
        
-        public float DonGia { get; set; }
+        public decimal DonGia { get; set; }
         
         public DateTime NgayCapNhat { get; set; }
 

@@ -200,6 +200,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010211813512_fdsfsssf2222.cs" />
+    <Compile Include="Migrations\202010211813512_fdsfsssf2222.designer.cs">
+      <DependentUpon>202010211813512_fdsfsssf2222.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BasicAut\MyAuthorizationServerProvider.cs" />
     <Compile Include="Models\BasicAut\Startup.cs" />
     <Compile Include="Models\BasicAut\UserMasterRepository.cs" />
@@ -1891,6 +1896,11 @@
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\webfonts\fa-brands-400.svg" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\webfonts\fa-regular-400.svg" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Scripts\library js\images\sort_asc.png" />
+    <Content Include="Scripts\library js\images\sort_asc_disabled.png" />
+    <Content Include="Scripts\library js\images\sort_both.png" />
+    <Content Include="Scripts\library js\images\sort_desc.png" />
+    <Content Include="Scripts\library js\images\sort_desc_disabled.png" />
     <Content Include="Scripts\library js\Jquery\bootstrap.js" />
     <Content Include="Scripts\library js\Jquery\bootstrap.min.js" />
     <None Include="Scripts\library js\Jquery\jquery-3.4.1.intellisense.js" />
@@ -1933,7 +1943,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -1993,6 +2002,11 @@
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\webfonts\fa-solid-900.woff2" />
     <Content Include="Scripts\library js\Jquery\jquery-3.4.1.min.map" />
     <Content Include="Scripts\library js\Jquery\jquery-3.4.1.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202010211813512_fdsfsssf2222.resx">
+      <DependentUpon>202010211813512_fdsfsssf2222.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

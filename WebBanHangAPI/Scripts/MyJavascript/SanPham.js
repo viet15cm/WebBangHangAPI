@@ -232,8 +232,30 @@ class MyObject {
                             }
                         },
                                                
-                        { data: 'DonGia' },
-                        {data : 'GiaBan'},
+                        {
+
+                            data: 'DonGia',
+                            render: function (data, type, row, meta) {
+                                if (data == null) {
+                                    return "";
+                                }
+                                var t = parseFloat(data, 10);
+                                return t.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                                debugger
+                            }
+                        },
+                        {
+
+                            data: 'GiaBan',
+                            render: function (data, type, row, meta) {
+                                if (data == null) {
+                                    return "";
+                                }
+                                var t = parseFloat(data, 10);
+                                return t.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                                debugger
+                            }
+                        },
                         { data: 'NgayCapNhat' },
                         { data: 'TenMH' },
 

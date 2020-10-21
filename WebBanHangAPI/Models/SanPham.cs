@@ -8,15 +8,17 @@ using WebBanHangAPI.Controllers;
 
 namespace WebBanHangAPI.Models
 {
-    public class SanPham
+    public class SanPham 
     {
         [Key]
         [StringLength(10)]
         public string IDSP { get; set; }
         [Required]
         public string TenSP { get; set; }
+        
+        
         [Required]
-        public float DonGia { get; set; }
+        public decimal DonGia { get; set; }
         [Required]
         public float GiaBan { get; set; }
         public string Anh { get; set; }

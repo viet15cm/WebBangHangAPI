@@ -15,6 +15,8 @@ namespace WebBanHangAPI.DataContextLayer
         public BanHangDBContext() : base("name=QLBH")
         {
         }
+
+       
         public DbSet<MatHang> matHangs { get; set; }
         public DbSet<NhaCungCap> nhaCungCaps { get; set; }
         
@@ -30,5 +32,10 @@ namespace WebBanHangAPI.DataContextLayer
         public DbSet<KhachHang> khachHangs { get; set; }
         public DbSet<NhapHoaDon> nhapHoaDons { get; set; }
         public object User { get; internal set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SanPham>().Property(x => x.DonGia).HasPrecision(16, 2);
+        }
     }
 }
