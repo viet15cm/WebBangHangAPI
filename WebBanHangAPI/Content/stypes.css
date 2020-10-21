@@ -1,0 +1,357 @@
+﻿
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    float: left;
+    margin: 0px auto;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.menu {
+    width: 15%;
+    border-bottom: 2px solid #808080;
+    height: calc( 100vh - 60px);
+    background: #ffffff;
+    float: left;
+}
+
+    .menu .logo {
+        height: 60px;
+        border-bottom: 2px solid #808080;
+    }
+
+.logo h2 {
+    margin-top: 0px;
+    margin-left: 20px;
+    line-height: 60px;
+}
+
+    .logo h2 i {
+        margin-right: 20px;
+    }
+
+.menu-content {
+    height: calc(100vh - 120px);
+    background: #ffffff;
+    overflow-y: scroll;
+}
+
+    .menu-content ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+    }
+
+        .menu-content ul li {
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 2px solid #808080;
+            font-size: 20px;
+            color: #808080;
+        }
+
+            .menu-content ul li a {
+                text-decoration: none;
+                margin: 20px;
+                color: black;
+            }
+
+        .menu-content ul i {
+            margin-right: 10px;
+        }
+.content-logout{
+    float: right;
+    padding-right: 100px;
+}
+.content-header-right ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    line-height: 60px;
+}
+.content-header-right ul li{
+    float: left;
+    font-size: 20px;
+    margin-left: 5px;
+}
+.content-header-right .logout{
+    padding-top: 2px;
+}
+
+#logout {
+    margin-left: 20px;
+}
+
+#logout:hover{
+    cursor: pointer;
+    color: #ccc;
+}
+
+.content {
+    width: 85%;
+    height: calc(100vh - 60px);
+    background: #F5F5F5;
+    float: left;
+}
+
+.content-header {
+    width: 100%;
+    height: 60px;
+    background: #ffffff;
+    border-bottom: 2px solid black;
+}
+
+.page-title, .menu-option {
+    height: 50px;
+    border-bottom: 2px solid #000000;
+}
+
+.page-title ul, .menu-option ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        line-height: 50px;
+}
+
+.page-title ul li, .menu-option ul li {
+     float: left;
+     margin-left: 20px;
+     font-size: 20px;
+}
+
+.page-title i, .menu-option i {
+        margin-right: 10px;
+}
+
+.menu-content ul li:hover {
+    background: #cfc5c5;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.grid {
+    width: 96%;
+    margin: 0px auto;
+    margin-top: 10px;
+    height: calc(100vh - 230px);
+    overflow-y: scroll;
+    border: none;
+}
+
+
+
+
+
+    .grid table tbody tr:hover {
+        background: #cfc5c5;
+        cursor: pointer;
+    }
+
+    .menu-content::-webkit-scrollbar, .grid::-webkit-scrollbar {
+        width: 6px;
+        background-color: #cfc5c5;
+    }
+
+
+
+    .menu-content::-webkit-scrollbar-thumb, .grid::-webkit-scrollbar-thumb {
+        background-color: #0094ff;
+    }
+
+
+
+.dialog-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #cfc5c5;
+    opacity: 0.7;
+    overflow: auto;
+    display: none;
+}
+
+.dialog {
+    position: absolute;
+    width: 40%;
+    border: 2px solid #808080;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.dialog-tittle {
+    display: flex;
+    height: 30px;
+    background: #808080;
+}
+
+.dialog-body {
+    padding: 10px;
+    background: #ffffff;
+}
+
+.tittle-button-close {
+    position: absolute;
+    right: 2px;
+    color: #cfc5c5;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+
+
+.tittle-text {
+    line-height: 30px;
+    font-size: 20px;
+}
+
+
+    .tittle-text i {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+
+
+
+/*input[type=text], input[type=date] {
+    width: 100%;
+    padding: 7px;
+    font-size: 15px;
+    background: #f1f1f1;
+    border: none;
+    margin: 5px 0px 20px 0px;
+}
+*/
+
+.dialog-input{
+    padding-right: 10px;
+}
+
+.dialog-input i {
+    margin-right: 10px;
+}
+
+.dialog-button {
+    background: #ffffff;
+    height: 40px;
+    padding-left: 10px;
+}
+
+    .dialog-button button {
+        padding: 5px;
+        margin-right: 10px;
+    }
+
+.footer {
+    width: 100%;
+    background: #ccc;
+    height: 60px;
+    clear: left;
+}
+
+
+.menu-option button {
+    border: none;
+    font-size: 17px;
+    padding: 5px 10px 5px 10px;
+    background: #cfc5c5;
+}
+
+    .menu-option button:hover {
+        background: #ffffff;
+    }
+
+.menu-option #myInputSearch {
+    background: url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+    border: none;
+    padding: 5px;
+    padding-left: 30px;
+    border: 2px solid #808080;
+}
+
+.css-input {
+    width: 100%;
+    padding: 7px;
+    font-size: 15px;
+    background: #f1f1f1;
+    border: none;
+    margin: 5px 0px 20px 0px;
+}
+
+.required-error {
+    width: 100%;
+    padding: 7px;
+    font-size: 15px;
+    background: #f1f1f1;
+    border: 2px solid red;
+    margin: 5px 0px 20px 0px;
+}
+
+.content-hide .grid tbody td input {
+    margin: 0px;
+    background: #cfc5c5;
+}
+
+.content-detail .grid tbody td input {
+    margin: 0px;
+    background: #cfc5c5;
+}
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+
+.displayimg img {
+    width: 150px;
+    height: 100px;
+}
+
+.row-selected {
+    background-color: #808080;
+}
+
+.grid h2 {
+    display: none;
+}
+
+@media print {
+
+
+    .grid {
+        margin: 1cm;
+    }
+    .grid h2 {
+        display: block;
+    }
+
+    .grid table tr {
+        font-size: 15px;
+    }
+    
+}
+
+@page {
+    margin: 0px;
+    margin-right: 1cm;
+}

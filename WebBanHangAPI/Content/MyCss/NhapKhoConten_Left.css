@@ -1,0 +1,64 @@
+﻿
+.content-hide .grid {
+    width: 63%;
+    float: left;
+   
+}
+
+.content-hide .conten-input-hide {
+    width: 35%;
+    float: left;
+    
+}
+
+
+.content-hide .grid {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.content-hide {
+    width: 100%;
+    display: none;
+    
+}
+
+.content-hide .grid {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 0px;
+}
+
+.conten-input-hide .conten-input{
+    padding: 20px 20px 20px;
+}
+
+.conten-input-hide i{
+    margin-right: 10px;
+}
+
+.conten-input-hide .conten-tiltle h2 {
+    margin: 0px;
+    
+    
+    margin-left: 12px;
+}
+
+td.details-control:before {
+        content: "\f055"; /* this is your text. You can also use UTF-8 character codes as I do here */
+        font-family: 'Font Awesome 5 Free';
+        
+        font-weight: 900;
+        text-align: center;
+       
+}
+
+tr.shown td.details-control:before {
+    content: "\f056"; /* this is your text. You can also use UTF-8 character codes as I do here */
+    font-family: 'Font Awesome 5 Free';
+    
+    text-align: center;
+    font-weight: 900;
+   
+}
+

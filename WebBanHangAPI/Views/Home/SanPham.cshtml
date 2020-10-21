@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "SanPham";
+    Layout = "~/Views/Shared/_LayoutDesigner.cshtml";
+}
+
+<div class="menu-option">
+    <ul>
+        <li><button id="btnAdd"><i class="far fa-edit"></i>Thêm</button></li>
+        <li><button id="btnDelete"><i class="fas fa-trash-alt"></i>Xóa</button></li>
+        <li><button id="btnEdit"><i class="fas fa-tools"></i>Sửa</button></li>
+
+        <!--<li>
+
+          <div class="ui-widget">
+              <input type="text" id="myInputSearch" placeholder="Tiềm Kiếm....." title="Type in a name">
+          </div>
+      </li>-->
+        
+
+    </ul>
+</div>
+
+<div class="grid">
+
+    <table class="tbData" id="tbSanPham">
+        <thead>
+            <tr>
+
+                <th>ID</th>
+                <th>Ảnh</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá Nhập</th>
+                <th>Giá Bán</th>
+                <th>Ngày Cập Nhật</th>
+
+                <th>Mặt Hàng</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div class="dialog-modal">
+</div>
+<div class="dialog">
+
+    <div class="dialog-tittle">
+        <div class="tittle-text"><i class="fas fa-info-circle"></i>Thông Tin Sản Phẩm</div>
+        <div class="tittle-button-close">
+            <i style="color : white " class="far fa-window-close"></i>
+        </div>
+    </div>
+
+    <div class="dialog-body">
+
+        <div class="dialog-input">
+            <i class="fas fa-user"></i>ID(*)
+            <input class="required valid-ID" id="txtCode" type="text" placeholder="ID" autocomplete="off" />
+            <i class="fab fa-product-hunt"></i>Tên Nhân Sản Phẩm(*)
+            <input id="txtName" class="required valid-Name" type="text" placeholder="Tên" autocomplete="off" />
+            <i class="fas fa-funnel-dollar"></i>Đơn Giá(*)
+            <input id="txtDonGia" class="required valid-DonGia" placeholder="Đơn Giá" type="text" autocomplete="off" />
+            <i class="fas fa-calendar-alt"></i>Ngày Cập Nhật
+            <input id="txtNgayNhap" class="required valid-NgayNhap" type="date" placeholder="Ngày Nhập" autocomplete="off" />
+            <i class="fas fa-cubes"></i>Mặt Hàng(*)
+          
+                <input id="listMNH" class="required valid-listMNH" placeholder="Tên Mặt Hàng" autocomplete="off" />
+
+         
+            <i class="fas fa-camera"></i>Chọn Ảnh<br />
+            <input type="file" class="upload" id="upload" /><i id="deleteImg" class="far fa-trash-alt"></i><br />
+            <div class="displayimg" id="displayimg"></div>
+
+        </div>
+    </div>
+
+    <div class="dialog-button">
+        <button id="btnSave">Lưu</button>
+        <button id="btnCancle">Thoắt</button>
+    </div>
+</div>
+
+<script src="~/Scripts/library js/Jquery/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/library js/datatable-js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/library js/autocomplete-js/jquery-ui-autocomplete.js"></script>
+<script src="~/Scripts/library js/print-jquery/printThis.js"></script>
+<script src="~/Scripts/MyJavascript/SanPham.js"></script>

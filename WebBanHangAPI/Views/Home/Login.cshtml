@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+
+    <div class="container">
+        <div class="login">
+            <div class="login-header">
+                <h1>Login</h1>
+            </div>
+            <div class="login-input">
+                <i class="fas fa-user"></i>User Name
+                <input class="required validate-username" id="txtUserName" type="text" placeholder="User Name" autocomplete="off" />
+                <i class="fas fa-unlock-alt"></i>PassWord
+                <input id="txtPassword" class="required validate-password" type="password" placeholder="PassWord" autocomplete="off" />
+
+                <span>
+                    <input id="cbxRemember" type="checkbox" checked="checked" name="Remember"> Remember me ?
+                </span>
+                <span id="cbxPassword">
+                    <input id="cbxPassWord" type="checkbox" name="Remember"> Show password ?
+                </span>
+            </div>
+            <div class="login-button">
+                <button id="btnLogin" data-url="@Url.Action("SanPham", "Home")">Login</button>
+                <span class="icon-login">
+                    <i class="fas fa-spinner fa-spin fa-3x"></i>
+                </span>
+                <span class="iput-create"><a href="Registor.html"><i class="fas fa-arrow-circle-right"></i> Creat User Login ?</a></span>
+            </div>
+        </div>
+        <div class="modal">
+
+        </div>
+        <div class="dialog-error">
+            <div>
+                <h4><i class="fas fa-exclamation-circle"></i>Password error !!!!</h4>
+            </div>
+            <div>
+                <button id="btnDialogClose" >Close</button>
+
+            </div>
+
+        </div>
+
+    </div>
+   
+

@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "KhoHang";
+    Layout = "~/Views/Shared/_LayoutDesigner.cshtml";
+}
+
+<div class="menu-option">
+    <ul>
+        <li><button id="btnPrint"><i class="far fa-edit"></i>In</button></li>
+
+    </ul>
+</div>
+<div class="grid">
+
+    <table class="tbData" id="tbKhoHang" border="1" cellpadding="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ảnh</th>
+                <th>Tên Hàng Hóa</th>
+                <th>Đơn Giá</th>
+                <th>Số Lượng</th>
+                <th>Tên Mặt Hàng</th>
+                <th>Ngày Nhập</th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="~/Scripts/library js/Jquery/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/library js/datatable-js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/library js/print-jquery/printThis.js"></script>
+<script src="~/Scripts/MyJavascript/KhoHang.js"></script>
