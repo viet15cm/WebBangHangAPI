@@ -299,6 +299,8 @@ class MyObject {
     }
 
     static showRowPhieuNhap(temp) {
+       
+        
         var tr = $(temp).closest('tr');
         var row = $('#tbNhapKho').DataTable().row(tr);
 
@@ -443,8 +445,14 @@ class MyObject {
                         { data: 'TongTien'}
                     ],
                     "order": [[1, 'asc']],
-                    "pageLength": 8
+                    "pageLength": 8,
+                    scrollResize: true,
+                    scrollY: 100,
+                    scrollCollapse: true,
+                    paging: true,
             });
+            $('.grid').css('display', 'block');
+            table.columns.adjust().draw();
            
         }).fail(function (response) {
                 debugger

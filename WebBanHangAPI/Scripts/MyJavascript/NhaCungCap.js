@@ -34,12 +34,29 @@ class MyObject {
         });
         $("#btnEdit").click(this.btnEditOnclick.bind(this));
         $("#btnDelete").click(this.btnDeleteOnclick.bind(this));
-        $("#myInputSearch").on("keyup", function () {
+        $(".tbData tbody").on("click", "tr", function () {
+
+            // $(this).siblings().removeClass('highlight');
+
+            // $(this).addClass('highlight');
+            var table = $('#tbNhaCungCap').DataTable();
+
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+
+        });
+        /*$("#myInputSearch").on("keyup", function () {
             var value = $(this).val().toLowerCase();
             $("#myTable tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
+        */
         $("#logout").click(this.btnLogoutOnclick.bind(this));
     }
 
@@ -95,7 +112,7 @@ class MyObject {
     }
 
    
-    loadData() {
+    /*loadData() {
         var temp = this;
         
         $.ajax({
@@ -124,6 +141,53 @@ class MyObject {
                 $('.grid tbody').append(htmlObject);
 
             });
+        }).fail(function () {
+
+            alert("Lỗi API NCC");
+        });
+
+
+    }
+    */
+
+    loadData() {
+        var temp = this;
+
+        $.ajax({
+
+            url: "https://localhost:44399/api/NhaCungCaps",
+            method: "GET",//put , pop , get,
+            data: "",// tham so truyenqua body repuest
+            contenType: "application/json",
+            dataType: "",
+
+
+        }).done(function (response) {
+
+            $('#tbNhaCungCap').DataTable().destroy();
+            var table = $('#tbNhaCungCap').DataTable({
+                data: response,
+
+                columns: [
+
+                    { data: 'IDNCC' },
+                    { data: 'TenNCC' },
+                    { data: 'DiaChi' },
+                    { data: 'Email' },
+                    { data: 'SoDienThoai' }
+
+
+                ],
+                "order": [[1, 'asc']],
+                "pageLength": 10,
+                scrollResize: true,
+                scrollY: 100,
+                scrollCollapse: true,
+                paging: true,
+            });
+            $('.grid').css('display', 'block');
+            table.columns.adjust().draw();
+            
         }).fail(function () {
 
             alert("Lỗi API NCC");

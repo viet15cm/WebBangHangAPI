@@ -217,6 +217,7 @@ class MyObject {
                     columns: [
                       
                         { data: 'IDSP' },
+                        { data: 'TenSP' },
                         {
 
                             data: 'Anh',
@@ -230,8 +231,7 @@ class MyObject {
                                 debugger
                             }
                         },
-                        { data: 'TenSP' },
-                        
+                                               
                         { data: 'DonGia' },
                         {data : 'GiaBan'},
                         { data: 'NgayCapNhat' },
@@ -248,6 +248,8 @@ class MyObject {
                     
                   
                 });
+                $('.grid').css('display', 'block');
+                table.columns.adjust().draw();
                 debugger
             }).fail(function (response) {
                 debugger

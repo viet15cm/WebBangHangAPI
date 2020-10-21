@@ -55,12 +55,13 @@ class MyObject {
 
         });
         
-        $("#myInputSearch").on("keyup", function () {
+       /* $("#myInputSearch").on("keyup", function () {
             var value = $(this).val().toLowerCase();
             $("#myTable tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
+        */
         $("#btnPrint").click(this.btnPrintKhoHang.bind(this));
 
         $("#logout").click(this.btnLogoutOnclick.bind(this));
@@ -175,15 +176,33 @@ class MyObject {
 
                     { data: 'IDNV' },
                     { data: 'TenNV' },
-                    { data: 'NgaySinh' },
+                    {
+
+                        data: 'NgaySinh',
+                        render: function (data, type, row, meta) {
+                            if (data == null) {
+                                return "";
+                            }
+                           
+                            return data.slice(0, 10);
+                            
+                        }
+                    },
                     { data: 'DiaChi' },
                     { data: 'Email' },
                     { data: 'SoDienThoai' }
 
                 ],
                 "order": [[1, 'asc']],
-                "pageLength": 7
+                "pageLength": 10,
+                scrollResize: true,
+                scrollY: 1,
+                scrollCollapse: true,
+                paging: true,
             });
+            $('.grid').css('display', 'block');
+            table.columns.adjust().draw();
+
         }).fail(function () {
 
             alert("Lỗi API")

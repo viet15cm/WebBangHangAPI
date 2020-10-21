@@ -253,6 +253,7 @@
     <Content Include="Scripts\library js\autocomplete-js\css-ui-autocomplete.css" />
     <Content Include="Scripts\library js\autocomplete-js\jquery-ui-autocomplete.js" />
     <Content Include="Scripts\library js\datatable-js\css.dataTables.min.css" />
+    <Content Include="Scripts\library js\datatable-js\dataTables.scrollResize.min.js" />
     <Content Include="Scripts\library js\datatable-js\jquery.dataTables.min.js" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\css\all.css" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\css\all.min.css" />

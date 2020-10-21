@@ -30,16 +30,35 @@ class MyObject {
         });
         $("#btnEdit").click(this.btnEditOnclick.bind(this));
         $("#btnDelete").click(this.btnDeleteOnclick.bind(this));
-        $("#myInputSearch").on("keyup", function () {
+        /*$("#myInputSearch").on("keyup", function () {
             var value = $(this).val().toLowerCase();
             $("#myTable tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
+        */
+        $(".tbData tbody").on("click", "tr", function () {
+
+            // $(this).siblings().removeClass('highlight');
+
+            // $(this).addClass('highlight');
+            var table = $('#tbMatHang').DataTable();
+
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+
+        });
 
         $("#logout").click(this.btnLogoutOnclick.bind(this))
 
     }
+
+    
 
  
     resetSession() {
@@ -96,7 +115,7 @@ class MyObject {
     
 
 
-    loadData() {
+   /* loadData() {
         var temp = this;
         //Lay Du lieu tren server thong qua loi goi api
         $.ajax({
@@ -129,6 +148,49 @@ class MyObject {
 
 
     }
+    */
+
+    loadData() {
+        var temp = this;
+        //Lay Du lieu tren server thong qua loi goi api
+        $.ajax({
+
+            url: "https://localhost:44399/api/MatHangs",
+            method: "GET",//put , pop , get,
+            data: "",// tham so truyenqua body repuest
+            contenType: "application/json",
+            dataType: "",
+
+        }).done(function (response) {
+
+            
+            $('#tbMatHang').DataTable().destroy();
+            var table = $('#tbMatHang').DataTable({
+                data: response,
+
+                columns: [
+
+                    { data: 'IDMH' },
+                    { data: 'TenMH' },
+                  
+                ],
+                "order": [[1, 'asc']],
+                "pageLength": 10,
+                scrollResize: true,
+                scrollY: 100,
+                scrollCollapse: true,
+                paging: true,
+            });
+            $('.grid').css('display', 'block');
+            table.columns.adjust().draw();
+        }).fail(function () {
+
+            alert("Lỗi API")
+        });
+
+
+    }
+
     btnDeleteOnclick() {
         var temp = this;
         if (temp.getObjectCode() != null) {

@@ -153,8 +153,14 @@ class MyObject {
                     
                 ],
                 "order": [[1, 'asc']],
-                "pageLength": 4
+                "pageLength": 10,
+                scrollResize: true,
+                scrollY: 100,
+                scrollCollapse: true,
+                paging: true,
             });
+            $('.grid').css('display', 'block');
+            table.columns.adjust().draw();
 
         }).fail(function (response) {
             debugger
