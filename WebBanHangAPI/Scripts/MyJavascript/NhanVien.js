@@ -37,7 +37,23 @@ class MyObject {
         
         $("#btnEdit").click(this.btnEditOnclick.bind(this));
         $("#btnDelete").click(this.btnDeleteOnclick.bind(this));
-       
+
+        $(".tbData tbody").on("click", "tr", function () {
+
+            // $(this).siblings().removeClass('highlight');
+
+            // $(this).addClass('highlight');
+            var table = $('#tbNhanVien').DataTable();
+
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+
+        });
         
         $("#myInputSearch").on("keyup", function () {
             var value = $(this).val().toLowerCase();
@@ -106,7 +122,7 @@ class MyObject {
 
     }
 
-    loadData() {
+    /*loadData() {
         var temp = this;
         //Lay Du lieu tren server thong qua loi goi api
         $.ajax({
@@ -139,6 +155,42 @@ class MyObject {
 
 
     }
+    */
+
+    loadData() {
+
+        $.ajax({
+
+            url: "https://localhost:44399/api/" + MyObject.NameAPI(),
+            method: "GET",//put , pop , get,
+            contenType: "application/json",
+
+        }).done(function (response) {
+
+            $('#tbNhanVien').DataTable().destroy();
+            var table = $('#tbNhanVien').DataTable({
+                data: response,
+
+                columns: [
+
+                    { data: 'IDNV' },
+                    { data: 'TenNV' },
+                    { data: 'NgaySinh' },
+                    { data: 'DiaChi' },
+                    { data: 'Email' },
+                    { data: 'SoDienThoai' }
+
+                ],
+                "order": [[1, 'asc']],
+                "pageLength": 7
+            });
+        }).fail(function () {
+
+            alert("Lỗi API")
+        });
+       
+    }
+
     btnDeleteOnclick() {
         var temp = this;
         if (temp.getObjectCode() != null) {

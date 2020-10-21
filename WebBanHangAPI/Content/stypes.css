@@ -97,7 +97,7 @@ html, body {
 .content {
     width: 85%;
     height: calc(100vh - 60px);
-    background: #F5F5F5;
+   
     float: left;
 }
 
@@ -149,21 +149,21 @@ html, body {
 
 
 
-    .grid table tbody tr:hover {
-        background: #cfc5c5;
-        cursor: pointer;
-    }
+.grid table tbody tr:hover {
+    background: #cfc5c5;
+    cursor: pointer;
+}
 
-    .menu-content::-webkit-scrollbar, .grid::-webkit-scrollbar {
-        width: 6px;
-        background-color: #cfc5c5;
-    }
+.menu-content::-webkit-scrollbar, .grid::-webkit-scrollbar {
+    width: 6px;
+    background-color: #cfc5c5;
+}
 
 
 
-    .menu-content::-webkit-scrollbar-thumb, .grid::-webkit-scrollbar-thumb {
-        background-color: #0094ff;
-    }
+.menu-content::-webkit-scrollbar-thumb, .grid::-webkit-scrollbar-thumb {
+    background-color: #0094ff;
+}    
 
 
 
@@ -216,10 +216,10 @@ html, body {
 }
 
 
-    .tittle-text i {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
+.tittle-text i {
+    margin-left: 5px;
+    margin-right: 5px;
+}    
 
 
 
@@ -248,10 +248,10 @@ html, body {
     padding-left: 10px;
 }
 
-    .dialog-button button {
-        padding: 5px;
-        margin-right: 10px;
-    }
+.dialog-button button {
+    padding: 5px;
+    margin-right: 10px;
+}    
 
 .footer {
     width: 100%;
@@ -268,9 +268,9 @@ html, body {
     background: #cfc5c5;
 }
 
-    .menu-option button:hover {
-        background: #ffffff;
-    }
+.menu-option button:hover {
+   background: #ffffff;
+}    
 
 .menu-option #myInputSearch {
     background: url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
@@ -313,6 +313,10 @@ table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+}
+
+table th {
+    background: #808080;
 }
 
 td, th {

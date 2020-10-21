@@ -236,7 +236,12 @@ class MyObject {
 
                     ],
                     "order": [[1, 'asc']],
-                    "pageLength": 4
+                    "pageLength": 5,
+                  
+                    deferRender: true,
+                    scrollY: 310,
+                    scrollCollapse: true,
+                    scroller: true
                 });
 
             }).fail(function (response) {
