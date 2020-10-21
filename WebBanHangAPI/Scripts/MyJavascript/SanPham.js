@@ -1,5 +1,6 @@
 ﻿
 
+
 $(document).ready(function () {
 
     var object = new MyObject();
@@ -207,13 +208,14 @@ class MyObject {
                 method: "GET",//put , pop , get,
                 contenType: "application/json",
             }).done(function (response) {
-
+                debugger;
                 $('#tbSanPham').DataTable().destroy();
+                debugger;
                 var table = $('#tbSanPham').DataTable({
                     data: response,
 
                     columns: [
-
+                      
                         { data: 'IDSP' },
                         {
 
@@ -222,6 +224,7 @@ class MyObject {
                                 if (data == null) {
                                     return "";
                                 }
+                                debugger;
                                 return '<img class="img-responsive" src="' + data + '" alt="Product_Image"'
                                     + 'height = "50px" width = "50px" /> ';
                                 debugger
@@ -237,13 +240,15 @@ class MyObject {
                     ],
                     "order": [[1, 'asc']],
                     "pageLength": 5,
-                  
-                    deferRender: true,
-                    scrollY: 310,
-                    scrollCollapse: true,
-                    scroller: true
-                });
 
+                    scrollResize: true,
+                    scrollY: 100,
+                    scrollCollapse: true,
+                    paging: true,
+                    
+                  
+                });
+                debugger
             }).fail(function (response) {
                 debugger
                 alert("Lỗi Sever API Hang Hoa");

@@ -140,7 +140,7 @@ html, body {
     width: 96%;
     margin: 0px auto;
     margin-top: 10px;
-    height: calc(100vh - 230px);
+    height: calc(100vh - 240px);
     overflow-y: scroll;
     border: none;
 }
@@ -270,15 +270,15 @@ html, body {
 
 .menu-option button:hover {
    background: #ffffff;
-}    
+}
 
-.menu-option #myInputSearch {
+/*.menu-option #myInputSearch {
     background: url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
     border: none;
     padding: 5px;
     padding-left: 30px;
     border: 2px solid #808080;
-}
+}*/
 
 .css-input {
     width: 100%;
@@ -313,6 +313,7 @@ table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+   
 }
 
 table th {
