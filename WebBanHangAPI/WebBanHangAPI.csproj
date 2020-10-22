@@ -260,6 +260,15 @@
     <Content Include="Scripts\library js\datatable-js\css.dataTables.min.css" />
     <Content Include="Scripts\library js\datatable-js\dataTables.scrollResize.min.js" />
     <Content Include="Scripts\library js\datatable-js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\library js\file-export\buttons.colVis.min.js" />
+    <Content Include="Scripts\library js\file-export\buttons.dataTables.min.css" />
+    <Content Include="Scripts\library js\file-export\buttons.flash.min.js" />
+    <Content Include="Scripts\library js\file-export\buttons.html5.min.js" />
+    <Content Include="Scripts\library js\file-export\buttons.print.min.js" />
+    <Content Include="Scripts\library js\file-export\dataTables.buttons.min.1.js" />
+    <Content Include="Scripts\library js\file-export\jszip.min.js" />
+    <Content Include="Scripts\library js\file-export\pdfmake.min.js" />
+    <Content Include="Scripts\library js\file-export\vfs_fonts.5.js" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\css\all.css" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\css\all.min.css" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\css\brands.css" />

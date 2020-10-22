@@ -321,6 +321,7 @@ table th {
 }
 
 td, th {
+   
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -343,20 +344,11 @@ td, th {
 @media print {
 
 
-    .grid {
-        margin: 1cm;
-    }
-    .grid h2 {
-        display: block;
-    }
-
-    .grid table tr {
-        font-size: 15px;
-    }
+ 
     
 }
-
 @page {
-    margin: 0px;
-    margin-right: 1cm;
+   
+    
+   
 }

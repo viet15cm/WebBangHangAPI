@@ -215,7 +215,7 @@ class MyObject {
                     data: response,
 
                     columns: [
-                      
+
                         { data: 'IDSP' },
                         { data: 'TenSP' },
                         {
@@ -231,7 +231,7 @@ class MyObject {
                                 debugger
                             }
                         },
-                                               
+
                         {
 
                             data: 'DonGia',
@@ -267,7 +267,69 @@ class MyObject {
                     scrollY: 100,
                     scrollCollapse: true,
                     paging: true,
-                    
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy',
+                        {
+                            extend: 'excel',
+                            text: 'Excel',
+                            title: 'Danh Sách Sản Phẩm',
+                            exportOptions: {
+                                modifier: {
+                                    page: 'current'
+                                },
+                                columns: ':visible'
+                            },
+                        },
+
+                        {
+                            extend: 'pdf',
+                            text: 'PDF',
+                            orientation: 'landscape',
+                            title: "Danh Sách Sản Phẩm",
+                            exportOptions: {
+                                modifier: {
+                                    page: 'current'
+                                },
+                                columns: ':visible'
+                            },
+                            customize: function (doc) {
+
+                                var colCount = new Array();
+                                $('#tbSanPham').find('tbody tr:first-child td').each(function () {
+                                    if ($(this).attr('colspan')) {
+                                        for (var i = 1; i <= $(this).attr('colspan'); $i++) {
+                                            colCount.push('*');
+                                        }
+                                    } else { colCount.push('*'); }
+                                });
+                                doc.content[1].table.widths = colCount;
+                            }
+                        },
+
+                        {
+                            extend: 'print',
+                            text: 'Print ',
+                            title: 'Danh Sách Sản Phẩm',
+                            
+                            exportOptions: {
+                                modifier: {
+                                    page: 'current'
+                                },
+                                columns: ':visible'
+                            },
+                            /* customize: function (win) {
+                                 $(win.document.body).addClass('white-bg');
+                                 $(win.document.body).css('font-size', '10px');
+                                 $(win.document.body).find('table')
+                                     .addClass('compact')
+                                     .css('font-size', 'inherit');
+                             },
+                             */
+                        },
+
+                        'colvis'
+                    ]
                   
                 });
                 $('.grid').css('display', 'block');
