@@ -1,7 +1,4 @@
-﻿
-
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     var object = new MyObject()
 
@@ -54,7 +51,70 @@ class MyObject {
             }
 
         });
-        $(".tbData tbody").on("click", "tr", function () {
+
+        $(document).on('click', '#print-phieuNhap', function () {
+
+            
+            var ID = $(this).closest("tr").find("td").eq(1).html();
+          
+            //Lay Du lieu tren server thong qua loi goi api
+            $.ajax({
+
+                url: "https://localhost:44399/NhapKhoes/GetPhieuNhapsSanPhams/" + ID,
+                method: "GET",//put , pop , get,
+                contenType: "application/json",
+
+            }).done(function (response) {
+
+                debugger
+                $(".in-phieuNhap .grid tbody").empty();
+                var i = 0;
+                $.each(response, function (index, item) {
+                   
+                    var htmlObject = $(`<tr>
+                        <td>`+ i + `</td >
+                        <td>`+ item.IDSP + `</td>
+                        <td>`+ item.TenSP+ `</td>
+                        <td>`+ item.SoLuong + `</td>
+                        <td>`+ item.DonGia + `</td>
+                        
+                        </tr>`);
+                    $('.in-phieuNhap .grid tbody').append(htmlObject);
+                    i += 1;
+                });
+
+                $('.in-phieuNhap').printThis({
+                    debug: false,               // show the iframe for debugging
+                    importCSS: true,            // import parent page css
+                    importStyle: false,         // import style tags
+                    printContainer: true,       // print outer container/$.selector
+                    loadCSS: "",                // path to additional css file - use an array [] for multiple
+                    pageTitle: "fdsfdssd",              // add title to print page
+                    removeInline: true,        // remove inline styles from print elements
+                    removeInlineSelector: "",  // custom selectors to filter inline styles. removeInline must be true
+                    printDelay: 333,            // variable print delay
+                    header: null,               // prefix to html
+                    footer: null,               // postfix to html
+                    base: false,                // preserve the BASE tag or accept a string for the URL
+                    formValues: true,           // preserve input/form values
+                    canvas: false,              // copy canvas content
+                    doctypeString: '<!DOCTYPE html>',       // enter a different doctype for older markup
+                    removeScripts: false,       // remove script tags from print content
+                    copyTagClasses: false,      // copy classes from the html & body tag
+                    beforePrintEvent: null,     // function for printEvent in iframe
+                    beforePrint: null,          // function called before iframe is filled
+                    afterPrint: null            // function called before iframe is removed
+                });
+            }).fail(function () {
+
+                alert("Lỗi API")
+            });
+
+           
+
+        });
+
+        /*$(".tbData tbody").on("click", "tr", function () {
 
             var table = $('#tbNhapKho').DataTable();
 
@@ -67,6 +127,7 @@ class MyObject {
             }
 
         });
+        */
         $("#btnEdit").click(this.btnEditOnclick.bind(this));
         $("#btnDelete").click(this.btnDeleteOnclick.bind(this));
 
@@ -269,29 +330,19 @@ class MyObject {
     }
 
     loadUserName() {
-
-
         var name = localStorage.getItem("NameUser");
-
         $("#username").html(name);
-
     }
-
-
-
 
     getTooken() {
         var temp = this;
         $.ajax({
             url: "https://localhost:44399/Home/GetTooken",
             method: "GET",
-
-
         }).done(function (response) {
             debugger;
             temp.tooken = response;
             temp.loadData();
-
         }).fail(function () {
             alert("Loi");
         });
@@ -299,8 +350,7 @@ class MyObject {
     }
 
     static showRowPhieuNhap(temp) {
-       
-        
+              
         var tr = $(temp).closest('tr');
         var row = $('#tbNhapKho').DataTable().row(tr);
 
@@ -316,6 +366,11 @@ class MyObject {
 
 
             }).done(function (response) {
+                const formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'VND',
+                    minimumFractionDigits: 2
+                })
                 var c = "";
                 for (var i = 0; i < response.length; i++) {
                     debugger
@@ -326,9 +381,9 @@ class MyObject {
 
                             c += '<tr>' +
                                 '<td>' + response[i].NhapKhos[j].IDNK + '</td>' +
-                                '<td>' + '<img src ="' + response[i].Anh + '" style = "width: 50px; height: 50px;" />' + '</td>' +
+                                '<td>' + '<img src ="' + response[i].Anh + '" style = "width: 30px; height: 30px;" />' + '</td>' +
                                 '<td>' + response[i].TenSP + '</td>' +
-                                '<td>' + response[i].DonGia + '</td>' +
+                                '<td>' + formatter.format(response[i].DonGia) + '</td>' +
                                 '<td>' + response[i].NgayCapNhat + '</td>' +
                                 '<td>' + response[i].NhapKhos[j].SoLuong + '</td>' +
                                 '</tr>';
@@ -442,10 +497,25 @@ class MyObject {
                         { data: 'IDNCC' },
                         { data: 'NgayNhap' },
                         { data: 'TongSoLuong' },
-                        { data: 'TongTien'}
+                        {
+
+                            data: 'TongTien',
+                            render: $.fn.dataTable.render.number(',', '.', 2, '₫ ')
+
+                        },
+
+                        {
+
+                            render: function (data, type, row, meta) {
+                              
+                                return '<i id="print-phieuNhap" class="fas fa-print"></i>';
+                               
+                            }
+                        },
+                      
                     ],
                     "order": [[1, 'asc']],
-                    "pageLength": 8,
+                    "pageLength": 10,
                     scrollResize: true,
                     scrollY: 100,
                     scrollCollapse: true,
@@ -517,13 +587,11 @@ class MyObject {
         });
 
         if (isValid) {
-
-
             var object = {};
             object.IDPN = "";
             object.IDNV = $("#listNV").val();
             object.IDNCC = $("#listNCC").val();
-            object.NgayNhap = $("#datePhieuNhap").val();
+            object.NgayNhap = $("#datePhieuNhap").val() + temp.newTime();
             debugger;
             $.ajax({
                 url: "https://localhost:44399/PhieuNhaps/PostPhieuNhapGetIdentity",
@@ -610,7 +678,6 @@ class MyObject {
     //addItempTableSanPham okokokokok
    
      addItempTableSanPham(value) {
-
         
         debugger
 
@@ -867,7 +934,7 @@ class MyObject {
         return yy + "-" + b + "-" + a;
     }
 
-    time() {
+    newTime() {
         var h, p, s;
         var time = new Date();
         var hh, pp, ss;

@@ -131,7 +131,7 @@ html, body {
 }
 
 .menu-content ul li:hover {
-    background: #cfc5c5;
+    background: #ccc;
     transition: 0.3s;
     cursor: pointer;
 }
@@ -150,7 +150,7 @@ html, body {
 
 
 .grid table tbody tr:hover {
-    background: #cfc5c5;
+    background: #f1f1f1;
     cursor: pointer;
 }
 
@@ -317,7 +317,7 @@ table {
 }
 
 table th {
-    background: #808080;
+    background: #cfc5c5;
 }
 
 td, th {
@@ -343,8 +343,10 @@ td, th {
 
 @media print {
 
-
- 
+    .in-phieuNhap, .grid h2 {
+        display: block;
+    }
+    
     
 }
 @page {

@@ -1,0 +1,18 @@
+﻿namespace WebBanHangAPI.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class ffffff5 : DbMigration
+    {
+        public override void Up()
+        {
+            AlterColumn("dbo.SanPhams", "Anh", c => c.String());
+        }
+        
+        public override void Down()
+        {
+            AlterColumn("dbo.SanPhams", "Anh", c => c.String(nullable: false));
+        }
+    }
+}

@@ -165,46 +165,29 @@ namespace WebBanHangAPI.Controllers
             return Ok(joinSanPhams);
 
         }
-        
-        
-      
+
         [Route("getJoinSanPhamsMatHangs")]
-        
+
         public IHttpActionResult GetJoinSanPhamsMatHangs()
         {
 
-            var joinSanPhams = new List<SanPhamMatHang>();
-            using (var db = new BanHangDBContext())
-            {
-                
-                var sp = db.sanPhams.ToList();
-                var mh = db.matHangs.ToList();
-                joinSanPhams = sp.Join(// outer sequence 
-                      mh,  // inner sequence 
-                      sanpham => sanpham.IDMH,  // outerKeySelector
-                      mathang => mathang.IDMH,  // innerKeySelector
-                      (sanpham, mathang) => new SanPhamMatHang() // result selector
-                      {
-                          IDSP = sanpham.IDSP,
-                          TenSP = sanpham.TenSP,
-                          GiaBan = sanpham.GiaBan,
-                          DonGia = sanpham.DonGia,
-                          NgayCapNhat = sanpham.NgayCapNhat,
-                          Anh = sanpham.Anh,
-                          IDMH = mathang.IDMH,
-                          TenMH = mathang.TenMH
+            var slnv = db.nhanViens.ToList().Count;
 
-
-                      }).ToList();
-
-
-
-            }
-
-          
-            return Ok(joinSanPhams);
-
+            var join = from sp in db.sanPhams
+                       join mh in db.matHangs on sp.IDMH equals mh.IDMH
+                       select new
+                       {
+                           IDSP = sp.IDSP,
+                           TenSP = sp.TenSP,
+                           DonGia = sp.DonGia,
+                           Anh = sp.Anh,
+                           GiaBan = sp.DonGia + (sp.DonGia * 10 / 100) + (sp.DonGia * 30 / 100) + (sp.DonGia *  (slnv * 1.2m * 10/100)),
+                           NgayCapNhat = sp.NgayCapNhat,
+                           TenMH = mh.TenMH
+                       };
+            return Ok(join.ToList());
         }
+        
         [Route("")]
         public ICollection<SanPham> GetsanPhams()
         {

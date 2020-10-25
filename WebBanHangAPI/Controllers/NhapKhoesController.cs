@@ -69,6 +69,117 @@ namespace WebBanHangAPI.Controllers
             return Ok(nhapKho);
         }
 
+        [Route("GetPhieuNhapsSanPhams/{ID}")]
+        [ResponseType(typeof(PhieuNhap))]
+        public IHttpActionResult GetPhieuNhapsSanPhams(string ID)
+        {
+            PhieuNhap phieuNhap = db.phieuNhaps.Find(ID);
+            if (phieuNhap == null)
+            {
+                return NotFound();
+            }
+
+            var listNK = phieuNhap.NhapKhos.ToList();
+
+
+            var join = from nk in listNK
+                       join sp in db.sanPhams on nk.IDSP equals sp.IDSP
+                       select new
+                       {
+
+                           IDSP = sp.IDSP,
+                           TenSP = sp.TenSP,
+                           SoLuong = nk.SoLuong,
+                           DonGia = sp.DonGia,
+
+                       };
+            return Ok(join);
+        }
+
+        [Route("getJoinSanPhamsNhapKhosNhanViensPhieuNhaps/{ID}")]
+        [ResponseType(typeof(SanPham))]
+        public IHttpActionResult getJoinSanPhamsNhapKhosPhieuNhaps(string ID)
+        {
+
+            if(ID == null)
+            {
+                return NotFound();
+            }
+
+            var slnv = db.nhanViens.ToList().Count;
+
+            var findPhieuNhaps = from pn in db.phieuNhaps
+                                where pn.IDPN == ID
+                                select pn;
+
+            if(findPhieuNhaps != null)
+            {
+
+                var pnsJoin = from nv in db.nhanViens
+                              join pn in findPhieuNhaps on nv.IDNV equals pn.IDNV
+                              join ncc in db.nhaCungCaps on pn.IDNCC equals ncc.IDNCC
+                              select new
+                              {
+                                  IDNV = nv.IDNV,
+                                  TenNV = nv.TenNV,
+                                  IDPN = pn.IDPN,
+                                  TenNCC = ncc.TenNCC,
+                                  IDNCC = ncc.IDNCC,
+                                  NgayNhap = pn.NgayNhap
+
+
+                              };
+
+                var pnJoin = from pn in pnsJoin
+                             join nk in db.nhapKhos on pn.IDPN equals nk.IDPN
+                             join sp in db.sanPhams on nk.IDSP equals sp.IDSP
+
+
+
+                             select new
+                             {
+                                 IDPN = pn.IDPN,
+                                 TenNCC = pn.TenNCC,
+                                 TenNV = pn.TenNV,
+                                 IDNV = pn.IDNV,
+                                 IDNCC = pn.IDNCC,
+                                 IDNK = nk.IDNK,
+                                 IDSP = nk.IDSP,
+                                 NgayNhap = pn.NgayNhap,
+                                 SoLuong = nk.SoLuong,
+                                 TenSP = sp.TenSP,
+                                 DonGia = sp.DonGia,
+
+                                 NgayCapNhat = sp.NgayCapNhat
+
+
+                             };
+
+                var pnGroup = from pn in pnJoin
+                              group pn by new { pn.IDPN, pn.IDNV, pn.TenNV, pn.TenNCC, pn.IDNCC, pn.NgayNhap } into obGroup
+                              orderby obGroup.Key.IDPN, obGroup.Key.IDNV, obGroup.Key.IDNCC, obGroup.Key.NgayNhap, obGroup.Key.TenNCC, obGroup.Key.TenNV
+
+                              select new
+                              {
+                                  IDPN = obGroup.Key.IDPN,
+                                  TenNV = obGroup.Key.TenNV,
+                                  TenNCC = obGroup.Key.TenNCC,
+                                  IDNV = obGroup.Key.IDNV,
+                                  IDNCC = obGroup.Key.IDNCC,
+                                  NgayNhap = obGroup.Key.NgayNhap,
+                                  TongSoLuong = obGroup.Sum(x => x.SoLuong),
+                                  TongTien = obGroup.Sum(x => x.DonGia),
+
+                              };
+                return Ok(pnGroup.ToList());
+            }
+
+
+
+            return NotFound();
+            
+        }
+
         // PUT: api/NhapKhoes/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutNhapKho(string id, NhapKho nhapKho)
@@ -108,19 +219,23 @@ namespace WebBanHangAPI.Controllers
         [ResponseType(typeof(NhapKho[]))]
         public IHttpActionResult PostListNhapKho(NhapKho[] nhapKhos)
         {
-            
+           if(nhapKhos != null)
+            {
                 for (int i = 0; i < nhapKhos.Length; i++)
-                {                    
+                {
                     using (var entity = new BanHangDBContext())
-                    {                                              
+                    {
                         nhapKhos[i].IDNK = GetIdentity();
                         entity.nhapKhos.Add(nhapKhos[i]);
                         entity.SaveChanges();
                     }
 
-                }       
+                }
+                return Ok(nhapKhos);
+            }
+               
             
-            return Ok(nhapKhos);
+            return NotFound();
         }
 
         // POST: api/NhapKhoes

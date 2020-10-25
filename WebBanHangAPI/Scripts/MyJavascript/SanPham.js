@@ -208,133 +208,126 @@ class MyObject {
                 method: "GET",//put , pop , get,
                 contenType: "application/json",
             }).done(function (response) {
-                debugger;
-                $('#tbSanPham').DataTable().destroy();
-                debugger;
-                var table = $('#tbSanPham').DataTable({
-                    data: response,
 
-                    columns: [
+                    $('#tbSanPham').DataTable().destroy();
+                    debugger;
+                    var table = $('#tbSanPham').DataTable({
+                        data: response,
+                        columnDefs: [
+                        
+                            { orderable: false, targets: 4 },
+                            { orderable: false, targets: 1 }
+                        ],
 
-                        { data: 'IDSP' },
-                        { data: 'TenSP' },
-                        {
+                        columns: [
 
-                            data: 'Anh',
-                            render: function (data, type, row, meta) {
-                                if (data == null) {
-                                    return "";
+                            { data: 'IDSP' },
+                            { data: 'TenSP' },
+                            {
+
+                                data: 'Anh',
+                                render: function (data, type, row, meta) {
+                                    if (data == null) {
+                                        return "";
+                                    }
+                                    debugger;
+                                    return '<img class="img-responsive" src="' + data + '" alt="Product_Image"'
+                                        + 'height = "50px" width = "50px" /> ';
+                                    debugger
                                 }
-                                debugger;
-                                return '<img class="img-responsive" src="' + data + '" alt="Product_Image"'
-                                    + 'height = "50px" width = "50px" /> ';
-                                debugger
-                            }
-                        },
+                            },
 
-                        {
+                            {
 
-                            data: 'DonGia',
-                            render: function (data, type, row, meta) {
-                                if (data == null) {
-                                    return "";
+                                data: 'DonGia',
+                                render: $.fn.dataTable.render.number(',', '.', 2, '₫')
+                            },
+                            {
+     
+                                data: 'GiaBan',
+                                render: $.fn.dataTable.render.number(',', '.', 2, '₫')
+                            },
+                            { data: 'NgayCapNhat' },
+                            { data: 'TenMH' },
+
+                        ],
+                        "order": [
+                          
+                            [0, "asc"],
+                        ],
+                        "pageLength": 5,
+                        scrollResize: true,
+                        scrollY: 100,
+                        scrollCollapse: true,
+                        paging: true,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy',
+                            {
+                                extend: 'excel',
+                                text: 'Excel',
+                                title: 'Danh Sách Sản Phẩm',
+                                exportOptions: {
+                                    modifier: {
+                                        page: 'current'
+                                    },
+                                    columns: ':visible'
+                                },
+                            },
+
+                            {
+                                extend: 'pdf',
+                                text: 'PDF',
+                                orientation: 'landscape',
+                                title: "Danh Sách Sản Phẩm",
+                                exportOptions: {
+                                    modifier: {
+                                        page: 'current'
+                                    },
+                                    columns: ':visible'
+                                },
+                                customize: function (doc) {
+
+                                    var colCount = new Array();
+                                    $('#tbSanPham').find('tbody tr:first-child td').each(function () {
+                                        if ($(this).attr('colspan')) {
+                                            for (var i = 1; i <= $(this).attr('colspan'); $i++) {
+                                                colCount.push('*');
+                                            }
+                                        } else { colCount.push('*'); }
+                                    });
+                                    doc.content[1].table.widths = colCount;
                                 }
-                                var t = parseFloat(data, 10);
-                                return t.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
-                                debugger
-                            }
-                        },
-                        {
-
-                            data: 'GiaBan',
-                            render: function (data, type, row, meta) {
-                                if (data == null) {
-                                    return "";
-                                }
-                                var t = parseFloat(data, 10);
-                                return t.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
-                                debugger
-                            }
-                        },
-                        { data: 'NgayCapNhat' },
-                        { data: 'TenMH' },
-
-                    ],
-                    "order": [[1, 'asc']],
-                    "pageLength": 5,
-
-                    scrollResize: true,
-                    scrollY: 100,
-                    scrollCollapse: true,
-                    paging: true,
-                    dom: 'Bfrtip',
-                    buttons: [
-                        'copy',
-                        {
-                            extend: 'excel',
-                            text: 'Excel',
-                            title: 'Danh Sách Sản Phẩm',
-                            exportOptions: {
-                                modifier: {
-                                    page: 'current'
-                                },
-                                columns: ':visible'
                             },
-                        },
 
-                        {
-                            extend: 'pdf',
-                            text: 'PDF',
-                            orientation: 'landscape',
-                            title: "Danh Sách Sản Phẩm",
-                            exportOptions: {
-                                modifier: {
-                                    page: 'current'
+                            {
+                                extend: 'print',
+                                text: 'Print ',
+                                title: 'Danh Sách Sản Phẩm',
+
+                                exportOptions: {
+                                    modifier: {
+                                        page: 'current'
+                                    },
+                                    columns: ':visible'
                                 },
-                                columns: ':visible'
+                                /* customize: function (win) {
+                                     $(win.document.body).addClass('white-bg');
+                                     $(win.document.body).css('font-size', '10px');
+                                     $(win.document.body).find('table')
+                                         .addClass('compact')
+                                         .css('font-size', 'inherit');
+                                 },
+                                 */
                             },
-                            customize: function (doc) {
 
-                                var colCount = new Array();
-                                $('#tbSanPham').find('tbody tr:first-child td').each(function () {
-                                    if ($(this).attr('colspan')) {
-                                        for (var i = 1; i <= $(this).attr('colspan'); $i++) {
-                                            colCount.push('*');
-                                        }
-                                    } else { colCount.push('*'); }
-                                });
-                                doc.content[1].table.widths = colCount;
-                            }
-                        },
+                            'colvis'
+                        ]
 
-                        {
-                            extend: 'print',
-                            text: 'Print ',
-                            title: 'Danh Sách Sản Phẩm',
-                            
-                            exportOptions: {
-                                modifier: {
-                                    page: 'current'
-                                },
-                                columns: ':visible'
-                            },
-                            /* customize: function (win) {
-                                 $(win.document.body).addClass('white-bg');
-                                 $(win.document.body).css('font-size', '10px');
-                                 $(win.document.body).find('table')
-                                     .addClass('compact')
-                                     .css('font-size', 'inherit');
-                             },
-                             */
-                        },
-
-                        'colvis'
-                    ]
-                  
-                });
-                $('.grid').css('display', 'block');
-                table.columns.adjust().draw();
-                debugger
+                    });
+                    $('.grid').css('display', 'block');
+                    table.columns.adjust().draw();
+            
             }).fail(function (response) {
                 debugger
                 alert("Lỗi Sever API Hang Hoa");
@@ -363,6 +356,7 @@ class MyObject {
     btnDeleteOnclick() {
         var temp = this;
         if (temp.getObjectCode() != null) {
+
             debugger;
             $.ajax({
                 url: "https://localhost:44399/SanPhams/Delete/" + temp.getObjectCode(),
@@ -447,10 +441,6 @@ class MyObject {
         var trSelected = $(".tbData .selected");
         var objectCode = null;
         if (trSelected.length > 0) {
-
-
-
-
             var objectCode = $(trSelected).children()[0].textContent;
             debugger
         }
@@ -471,7 +461,8 @@ class MyObject {
         object.IDSP = $("#txtCode").val();
         object.TenSP = $("#txtName").val();
         object.DonGia = $("#txtDonGia").val();
-        object.GiaBan = String(giaBan);        object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
+        object.GiaBan = String(giaBan);
+        object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
         object.IDMH = $("#listMNH").val();
         object.Anh = fr.result.toString();
         debugger
@@ -511,13 +502,10 @@ class MyObject {
 
         $.ajax({
             url: "https://localhost:44399/api/" + MyObject.NameAPI() + "/" + temp.getObjectCode(),
-
             method: "PUT",
             data: JSON.stringify(object),
             contentType: "application/json",
             dataType: "json",
-
-
         }).done(function (res) {
             debugger;
             temp.loadData();
@@ -554,35 +542,50 @@ class MyObject {
                 if (input.files && input.files[0]) {
                     var file = input.files[0]; // The file
                     var fr = new FileReader(); // FileReader instance
-                    fr.onload = function () {
-                        
-                        $.ajax({
-                            url: "https://localhost:44399/NhanViens/GetSoLuongNV",
-                            method: "GET"
-
-                        }).done(function (responese) {
-                            debugger
-                            temp.addSanPham(responese, fr);
-
-                        })
-                    };
-                    //fr.readAsText( file );
                     fr.readAsDataURL(file);
-                    debugger
+                    fr.onload = function () {
+
+                        var object = {};
+
+                        object.IDSP = $("#txtCode").val();
+                        object.TenSP = $("#txtName").val();
+                        object.DonGia = $("#txtDonGia").val();                        
+                        object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
+                        object.IDMH = $("#listMNH").val();
+                        object.Anh = fr.result.toString();
+                        
+                        debugger
+                        $.ajax({
+                            url: "https://localhost:44399/api/" + MyObject.NameAPI(),
+                            method: "POST",
+                            data: JSON.stringify(object),
+                            contentType: "application/json",
+                            dataType: "json",
+
+                        }).done(function (res) {
+                            debugger;
+                            temp.loadData();
+                            temp.hideDialogDetail();
+                            debugger;
+
+                        }).fail(function (res) {
+                            alert("loi API");
+                            debugger
+                        })
+                        
+
+
+                        
+                        debugger
+                    }
                 }
                 else {
-                    $.ajax({
-                        url: "https://localhost:44399/NhanViens/GetSoLuongNV",
-                        method: "GET"
-
-                    }).done(function (responese) {
-                        var giaBan = temp.getGiaBan(responese);
+                    
                         var object = {};
                         // Do stuff on onload, use fr.result for contents of file
                         object.IDSP = $("#txtCode").val();
                         object.TenSP = $("#txtName").val();
-                        object.DonGia = $("#txtDonGia").val();
-                        object.GiaBan = String(giaBan);
+                        object.DonGia = $("#txtDonGia").val();                        
                         object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
                         object.IDMH = $("#listMNH").val();
 
@@ -603,7 +606,7 @@ class MyObject {
                             alert("loi API");
                             debugger
                         })
-                    });
+                    
                 }
 
 
@@ -617,41 +620,54 @@ class MyObject {
                 if (input.files && input.files[0]) {
                     var file = input.files[0]; // The file
                     var fr = new FileReader(); // FileReader instance
+                    fr.readAsDataURL(file);
                     fr.onload = function () {
+                        var object = {};
+                        object.IDSP = $("#txtCode").val();
+                        object.TenSP = $("#txtName").val();
+                        object.DonGia = $("#txtDonGia").val();                       
+                        object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
+                        object.IDMH = $("#listMNH").val();
+                        object.Anh = fr.result.toString();
+                        debugger
+
                         $.ajax({
-                            url: "https://localhost:44399/NhanViens/GetSoLuongNV",
-                            method: "GET"
+                            url: "https://localhost:44399/api/" + MyObject.NameAPI() + "/" + temp.getObjectCode(),
 
-                        }).done(function (responese) {
+                            method: "PUT",
+                            data: JSON.stringify(object),
+                            contentType: "application/json",
+                            dataType: "json",
+
+
+                        }).done(function (res) {
+                            debugger;
+                            temp.loadData();
+                            temp.hideDialogDetail();
+                            debugger;
+
+                        }).fail(function (res) {
                             debugger
-                            temp.editSanPham(responese, fr);
-
-                        })
+                            alert("loi API");
+                        });
                         // Do stuff on onload, use fr.result for contents of file
                        
 
                     };
                     //fr.readAsText( file );
-                    fr.readAsDataURL(file);
+                    
                     debugger
                 } else {
-
-                    $.ajax({
-                        url: "https://localhost:44399/NhanViens/GetSoLuongNV",
-                        method: "GET"
-
-                    }).done(function (responese) {
-                        var giaBan = temp.getGiaBan(responese);
 
                         var object = {};
                         object.IDSP = $("#txtCode").val();
                         object.TenSP = $("#txtName").val();
-                        object.DonGia = $("#txtDonGia").val();
-                        object.GiaBan = String(giaBan);
+                        object.DonGia = $("#txtDonGia").val();                       
                         object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
                         object.IDMH = $("#listMNH").val();
-                        object.Anh = $("#displayimg img").attr("src");
-                        debugger;
+                        object.Anh = $("#displayimg img").attr('src');
+                        debugger
+                       
                         $.ajax({
                             url: "https://localhost:44399/api/" + MyObject.NameAPI() + "/" + temp.getObjectCode(),
 
@@ -671,7 +687,7 @@ class MyObject {
                             alert("loi API");
                         });
 
-                    })
+                 
                     
                     
                 }

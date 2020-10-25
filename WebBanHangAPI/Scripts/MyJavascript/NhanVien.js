@@ -170,6 +170,7 @@ class MyObject {
 
             $('#tbNhanVien').DataTable().destroy();
             var table = $('#tbNhanVien').DataTable({
+                
                 data: response,
 
                 columns: [
@@ -193,6 +194,7 @@ class MyObject {
                     { data: 'SoDienThoai' }
 
                 ],
+                
                 "order": [[1, 'asc']],
                 "pageLength": 10,
                 scrollResize: true,
@@ -232,7 +234,9 @@ class MyObject {
                             columns: ':visible'
                         },
                         customize: function (doc) {
+
                             
+
                             var colCount = new Array();
                             $('#tbNhanVien').find('tbody tr:first-child td').each(function () {
                                 if ($(this).attr('colspan')) {

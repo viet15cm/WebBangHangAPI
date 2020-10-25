@@ -19,8 +19,7 @@ namespace WebBanHangAPI.Models
         
         [Required]
         public decimal DonGia { get; set; }
-        [Required]
-        public float GiaBan { get; set; }
+       
         public string Anh { get; set; }
         public DateTime NgayCapNhat { get; set; }
        

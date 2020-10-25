@@ -25,12 +25,12 @@ class MyObject {
    
 
     initEvents() {
-        $("#logout").click(this.btnLogoutOnclick.bind(this));
+      
         $("#btnPrint").click(this.btnPrintKhoHang.bind(this));
     }
 
     btnPrintKhoHang() {
-        $('.grid').printThis({
+        $('.in-phieuNhap').printThis({
             debug: false,               // show the iframe for debugging
             importCSS: true,            // import parent page css
             importStyle: false,         // import style tags
@@ -142,14 +142,33 @@ class MyObject {
                             debugger
                         }
                     },
-                    { data: 'TenSP' },
-
-                    { data: 'DonGia' },
+                    { data: 'TenSP' },           
+                    {
+                        data: 'DonGia',
+                        render: $.fn.dataTable.render.number(',', '.', 2, '₫')
+                    },
                     { data: 'TongSoLuong' },
-
+                        
+                    {
+                                            
+                        "render": function (data, type, row) {
+                            const formatter = new Intl.NumberFormat('en-US', {
+                                style: 'currency',
+                                currency: 'VND',
+                                minimumFractionDigits: 2
+                            })
+                            var sl = parseFloat(row.TongSoLuong, 10);
+                            var dg = parseFloat(row.DonGia, 10);
+                            data = sl * dg;
+                            debugger
+                            return formatter.format(data);
+                        },
+                        "targets": 0
+                        
+                    },
                    
                     { data: 'TenMH' },
-                    { data: 'NgayCapNhat' },
+                    
                     
                 ],
                 "order": [[1, 'asc']],

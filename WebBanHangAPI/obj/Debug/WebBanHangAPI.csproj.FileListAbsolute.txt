@@ -78,3 +78,5 @@ D:\VietC#\WebBanHangAPI\WebBanHangAPI\bin\Microsoft.Owin.Cors.xml
 D:\VietC#\WebBanHangAPI\WebBanHangAPI\bin\Microsoft.Owin.Host.SystemWeb.xml
 D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.Migrations.fdsfsssf2222.resources
 D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.csproj.GenerateResource.cache
+D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.Migrations.aass3.resources
+D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.Migrations.ffffff5.resources

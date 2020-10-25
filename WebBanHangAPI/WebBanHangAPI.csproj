@@ -204,6 +204,14 @@
     <Compile Include="Migrations\202010211813512_fdsfsssf2222.designer.cs">
       <DependentUpon>202010211813512_fdsfsssf2222.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010240539409_aass3.cs" />
+    <Compile Include="Migrations\202010240539409_aass3.designer.cs">
+      <DependentUpon>202010240539409_aass3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010240646437_ffffff5.cs" />
+    <Compile Include="Migrations\202010240646437_ffffff5.designer.cs">
+      <DependentUpon>202010240646437_ffffff5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BasicAut\MyAuthorizationServerProvider.cs" />
     <Compile Include="Models\BasicAut\Startup.cs" />
@@ -232,6 +240,7 @@
     <Content Include="Content\MyCss\Login.css" />
     <Content Include="Content\MyCss\NhapKho-Detail.css" />
     <Content Include="Content\MyCss\NhapKhoConten_Left.css" />
+    <Content Include="Content\MyCss\print-phieunhap.css" />
     <Content Include="Content\MyCss\Register.css" />
     <Content Include="Content\stypes.css" />
     <Content Include="favicon.ico" />
@@ -255,20 +264,21 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="HTML\PhieuNhap.html" />
     <Content Include="Scripts\library js\autocomplete-js\css-ui-autocomplete.css" />
     <Content Include="Scripts\library js\autocomplete-js\jquery-ui-autocomplete.js" />
     <Content Include="Scripts\library js\datatable-js\css.dataTables.min.css" />
     <Content Include="Scripts\library js\datatable-js\dataTables.scrollResize.min.js" />
     <Content Include="Scripts\library js\datatable-js\jquery.dataTables.min.js" />
-    <Content Include="Scripts\library js\file-export\buttons.colVis.min.js" />
-    <Content Include="Scripts\library js\file-export\buttons.dataTables.min.css" />
-    <Content Include="Scripts\library js\file-export\buttons.flash.min.js" />
-    <Content Include="Scripts\library js\file-export\buttons.html5.min.js" />
-    <Content Include="Scripts\library js\file-export\buttons.print.min.js" />
-    <Content Include="Scripts\library js\file-export\dataTables.buttons.min.1.js" />
-    <Content Include="Scripts\library js\file-export\jszip.min.js" />
-    <Content Include="Scripts\library js\file-export\pdfmake.min.js" />
-    <Content Include="Scripts\library js\file-export\vfs_fonts.5.js" />
+    <Content Include="Scripts\library js\File_export\buttons.colVis.min.8.js" />
+    <Content Include="Scripts\library js\File_export\buttons.dataTables.min.css" />
+    <Content Include="Scripts\library js\File_export\buttons.flash.min.2.js" />
+    <Content Include="Scripts\library js\File_export\buttons.html5.min.6.js" />
+    <Content Include="Scripts\library js\File_export\buttons.print.min.7.js" />
+    <Content Include="Scripts\library js\File_export\dataTables.buttons.min.1.js" />
+    <Content Include="Scripts\library js\File_export\jszip.min.3.js" />
+    <Content Include="Scripts\library js\File_export\pdfmake.min.js" />
+    <Content Include="Scripts\library js\File_export\vfs_fonts.5.js" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\css\all.css" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\css\all.min.css" />
     <Content Include="Scripts\library js\fontawesome-free-5.14.0-web\css\brands.css" />
@@ -1927,6 +1937,7 @@
     <Content Include="Scripts\MyJavascript\NhaCungCap.js" />
     <Content Include="Scripts\MyJavascript\NhanVien.js" />
     <Content Include="Scripts\MyJavascript\NhapKho.js" />
+    <Content Include="Scripts\MyJavascript\text.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2015,6 +2026,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010211813512_fdsfsssf2222.resx">
       <DependentUpon>202010211813512_fdsfsssf2222.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010240539409_aass3.resx">
+      <DependentUpon>202010240539409_aass3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010240646437_ffffff5.resx">
+      <DependentUpon>202010240646437_ffffff5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
