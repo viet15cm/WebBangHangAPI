@@ -75,6 +75,7 @@ class MyObject {
 
 
     getAutocompleteIDMH() {
+        var temp = this;
         var id = null;
         $("#listMNH").autocomplete({
          
@@ -82,7 +83,10 @@ class MyObject {
                 debugger
                 $.ajax({
                     url: "https://localhost:44399/MatHangs/getMatHangID/" + request.term,
-                    method: "GET"
+                    method: "GET",
+                    headers: {
+                        "Authorization": 'Bearer ' + temp.tooken
+                    }
 
 
                 }).done(function (data) {
@@ -127,7 +131,8 @@ class MyObject {
         var temp = this;
         $.ajax({
             url: "https://localhost:44399/Home/ResetTooken",
-            method: "GET"
+            method: "GET",
+            
 
         }).done(function (reponse) {
 
@@ -207,6 +212,9 @@ class MyObject {
                 url: "https://localhost:44399/SanPhams/getJoinSanPhamsMatHangs",
                 method: "GET",//put , pop , get,
                 contenType: "application/json",
+                headers: {
+                    "Authorization": 'Bearer ' + temp.tooken
+                }
             }).done(function (response) {
 
                     $('#tbSanPham').DataTable().destroy();
@@ -240,12 +248,12 @@ class MyObject {
                             {
 
                                 data: 'DonGia',
-                                render: $.fn.dataTable.render.number(',', '.', 2, '₫')
+                                render: $.fn.dataTable.render.number('.', ',',0, '₫ ')
                             },
                             {
      
                                 data: 'GiaBan',
-                                render: $.fn.dataTable.render.number(',', '.', 2, '₫')
+                                render: $.fn.dataTable.render.number('.', ',', 2, '₫ ')
                             },
                             { data: 'NgayCapNhat' },
                             { data: 'TenMH' },
@@ -364,6 +372,9 @@ class MyObject {
                 data: "",
                 contenType: "application/json",
                 dataType: "",
+                headers: {
+                    "Authorization": 'Bearer ' + temp.tooken
+                }
                 
             }).done(function (res) {
                
@@ -395,6 +406,9 @@ class MyObject {
             $.ajax({
                 url: "https://localhost:44399/api/SanPhams/" + temp.getObjectCode(),
                 method: "GET",
+                headers: {
+                    "Authorization": 'Bearer ' + temp.tooken
+                }
              
 
             }).done(function (res) {
@@ -472,6 +486,9 @@ class MyObject {
             data: JSON.stringify(object),
             contentType: "application/json",
             dataType: "json",
+            headers: {
+                "Authorization": 'Bearer ' + temp.tooken
+            }
 
         }).done(function (res) {
             debugger;
@@ -506,6 +523,9 @@ class MyObject {
             data: JSON.stringify(object),
             contentType: "application/json",
             dataType: "json",
+            headers: {
+                "Authorization": 'Bearer ' + temp.tooken
+            }
         }).done(function (res) {
             debugger;
             temp.loadData();
@@ -561,6 +581,9 @@ class MyObject {
                             data: JSON.stringify(object),
                             contentType: "application/json",
                             dataType: "json",
+                            headers: {
+                                "Authorization": 'Bearer ' + temp.tooken
+                            }
 
                         }).done(function (res) {
                             debugger;
@@ -596,6 +619,9 @@ class MyObject {
                             data: JSON.stringify(object),
                             contentType: "application/json",
                             dataType: "json",
+                            headers: {
+                                "Authorization": 'Bearer ' + temp.tooken
+                            }
 
                         }).done(function (res) {
                             temp.loadData();
@@ -638,6 +664,9 @@ class MyObject {
                             data: JSON.stringify(object),
                             contentType: "application/json",
                             dataType: "json",
+                            headers: {
+                                "Authorization": 'Bearer ' + temp.tooken
+                            }
 
 
                         }).done(function (res) {
@@ -675,6 +704,9 @@ class MyObject {
                             data: JSON.stringify(object),
                             contentType: "application/json",
                             dataType: "json",
+                            headers: {
+                                "Authorization": 'Bearer ' + temp.tooken
+                            }
 
                         }).done(function (res) {
                             debugger;

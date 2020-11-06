@@ -19,44 +19,45 @@ namespace WebBanHangAPI.Controllers
         private BanHangDBContext db = new BanHangDBContext();
 
 
-       /* [Route("GetIdentity")]
-        [ResponseType(typeof(string))]
-        public IHttpActionResult GetIdentity()
-        {
-            string ID = "";
-            using (var entity = new BanHangDBContext())
-            {
-                var list = entity.phieuNhaps.ToList();
-                if (list.Count == 0)
-                    ID = "NK000";
-                else
-                {
-                    int temp;
-                    ID = "NK";
-                    temp = Convert.ToInt32(list[list.Count - 1].IDPN.ToString().Substring(2, 3));
-                    temp = temp + 1;
-                    if (temp < 10)
+        /* [Route("GetIdentity")]
+         [ResponseType(typeof(string))]
+         public IHttpActionResult GetIdentity()
+         {
+             string ID = "";
+             using (var entity = new BanHangDBContext())
+             {
+                 var list = entity.phieuNhaps.ToList();
+                 if (list.Count == 0)
+                     ID = "NK000";
+                 else
+                 {
+                     int temp;
+                     ID = "NK";
+                     temp = Convert.ToInt32(list[list.Count - 1].IDPN.ToString().Substring(2, 3));
+                     temp = temp + 1;
+                     if (temp < 10)
 
-                        ID = ID + "00";
-                    else if (temp < 100)
-                        ID = ID + "0";
-                    ID = ID + temp.ToString();
-                }
+                         ID = ID + "00";
+                     else if (temp < 100)
+                         ID = ID + "0";
+                     ID = ID + temp.ToString();
+                 }
 
 
-            }
-            return Ok(ID);
-        }
-       */
+             }
+             return Ok(ID);
+         }
+        */
         // GET: api/NhapKhoes
-        [Route("")]
-      
+        
+        [Route("")]      
         public ICollection<NhapKho> GetnhapKhos()
         {
             return db.nhapKhos.ToList();
         }
 
         // GET: api/NhapKhoes/5
+       
         [ResponseType(typeof(NhapKho))]
         public IHttpActionResult GetNhapKho(string id)
         {
@@ -68,7 +69,7 @@ namespace WebBanHangAPI.Controllers
 
             return Ok(nhapKho);
         }
-
+        
         [Route("GetPhieuNhapsSanPhams/{ID}")]
         [ResponseType(typeof(PhieuNhap))]
         public IHttpActionResult GetPhieuNhapsSanPhams(string ID)
@@ -86,16 +87,18 @@ namespace WebBanHangAPI.Controllers
                        join sp in db.sanPhams on nk.IDSP equals sp.IDSP
                        select new
                        {
-
+                           IDNK = nk.IDNK,
+                           Anh = sp.Anh,
                            IDSP = sp.IDSP,
                            TenSP = sp.TenSP,
                            SoLuong = nk.SoLuong,
                            DonGia = sp.DonGia,
+                           ThanhTien = sp.DonGia * nk.SoLuong,
 
                        };
             return Ok(join);
         }
-
+        
         [Route("getJoinSanPhamsNhapKhosNhanViensPhieuNhaps/{ID}")]
         [ResponseType(typeof(SanPham))]
         public IHttpActionResult getJoinSanPhamsNhapKhosPhieuNhaps(string ID)
@@ -149,7 +152,7 @@ namespace WebBanHangAPI.Controllers
                                  SoLuong = nk.SoLuong,
                                  TenSP = sp.TenSP,
                                  DonGia = sp.DonGia,
-
+                                 TongTienSP = nk.SoLuong * sp.DonGia,
                                  NgayCapNhat = sp.NgayCapNhat
 
 
@@ -168,8 +171,7 @@ namespace WebBanHangAPI.Controllers
                                   IDNCC = obGroup.Key.IDNCC,
                                   NgayNhap = obGroup.Key.NgayNhap,
                                   TongSoLuong = obGroup.Sum(x => x.SoLuong),
-                                  TongTien = obGroup.Sum(x => x.DonGia),
-
+                                  TongTien = obGroup.Sum(x => x.TongTienSP),
                               };
                 return Ok(pnGroup.ToList());
             }
@@ -181,6 +183,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/NhapKhoes/5
+        
         [ResponseType(typeof(void))]
         public IHttpActionResult PutNhapKho(string id, NhapKho nhapKho)
         {
@@ -215,6 +218,7 @@ namespace WebBanHangAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+       
         [Route("PostListNhapKho")]
         [ResponseType(typeof(NhapKho[]))]
         public IHttpActionResult PostListNhapKho(NhapKho[] nhapKhos)
@@ -239,6 +243,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/NhapKhoes
+        
         [ResponseType(typeof(NhapKho))]
         public IHttpActionResult PostNhapKho(NhapKho nhapKho)
         {
@@ -269,6 +274,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // DELETE: api/NhapKhoes/5
+        
         [ResponseType(typeof(NhapKho))]
         public IHttpActionResult DeleteNhapKho(string id)
         {

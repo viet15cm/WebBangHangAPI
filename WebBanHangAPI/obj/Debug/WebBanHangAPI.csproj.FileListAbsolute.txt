@@ -80,3 +80,5 @@ D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.Migrations.fdsfsss
 D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.csproj.GenerateResource.cache
 D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.Migrations.aass3.resources
 D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.Migrations.ffffff5.resources
+D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.Migrations.ssaadaa111111.resources
+D:\VietC#\WebBanHangAPI\WebBanHangAPI\obj\Debug\WebBanHangAPI.Migrations.saaaaaj111.resources

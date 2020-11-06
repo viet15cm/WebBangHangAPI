@@ -11,6 +11,10 @@ body {
     -moz-box-sizing: border-box;
 }
 
+p{
+    margin : 0px;
+}
+
 .page {
     width: 21cm;
     overflow: hidden;
@@ -32,12 +36,17 @@ body {
 
 @page {
     size: A4;
-    margin: 0;
+   
 }
 
+.control{
+   float: right;
+   padding: 10px;
+}
 button {
     width: 100px;
     height: 24px;
+    
 }
 
 .header {
@@ -46,15 +55,24 @@ button {
 
 .logo {
     background-color: #FFFFFF;
-    text-align: left;
+    text-align: center;
     float: left;
+    
 }
+
+.logo img{
+    width: 150px;
+    height: 150px;
+}
+
+
+
 
 .company {
     padding-top: 24px;
     text-transform: uppercase;
     background-color: #FFFFFF;
-    text-align: right;
+    text-align: center;
     float: right;
     font-size: 16px;
 }
@@ -115,12 +133,20 @@ button {
     .TableData TR {
         height: 24px;
         border: thin solid #d3d3d3;
+       
     }
 
+        .TableData TR th {
+            text-align: left;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
         .TableData TR TD {
-            padding-right: 2px;
-            padding-left: 2px;
+            padding-right: 5px;
+            padding-left: 5px;
             border: thin solid #d3d3d3;
+            text-align: left;
         }
 
         .TableData TR:hover {
@@ -170,7 +196,7 @@ button {
 
 @media print {
     @page {
-        margin: 0;
+        
         border: initial;
         border-radius: initial;
         width: initial;

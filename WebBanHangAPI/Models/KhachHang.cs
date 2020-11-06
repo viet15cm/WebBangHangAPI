@@ -20,6 +20,8 @@ namespace WebBanHangAPI.Models
         [Required]
         [MaxLength(13)]
         public string SDT { get; set; }
+        [MaxLength(30)]
+        public string Email { get; set; }
         public DateTime NgaySinh { get; set; }
         public virtual ICollection<HoaDon> HoaDons { get; set; }
     }

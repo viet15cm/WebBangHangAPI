@@ -11,6 +11,8 @@ namespace WebBanHangAPI.Controllers
 {
     public class HomeController : Controller
     {
+     
+
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
@@ -96,6 +98,22 @@ namespace WebBanHangAPI.Controllers
                 return View();
             return RedirectToAction("Login");
         }
+
+        public ActionResult KhachHang()
+        {
+            ViewBag.Title = "HoaDon Page";
+            if (Request.Cookies["Accout"] != null || Session["Accouts"] != null)
+                return View();
+            return RedirectToAction("Login");
+        }
+
+        public ActionResult NhapHoaDon()
+        {
+            ViewBag.Title = "NhapHoaDon Page";
+            if (Request.Cookies["Accout"] != null || Session["Accouts"] != null)
+                return View();
+            return RedirectToAction("Login");
+        }
   
         [HttpPost]
         public JsonResult SetMemory(TokenAccount tk)
@@ -161,5 +179,7 @@ namespace WebBanHangAPI.Controllers
             return "Thang Cong";
 
         }
+
+
     }
 }

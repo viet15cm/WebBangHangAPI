@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "KhachHang";
+    Layout = "~/Views/Shared/_LayoutDesigner.cshtml";
+}
+
+<div class="menu-option">
+    <ul>
+        <li><button id="btnAdd"><i class="far fa-edit"></i>Thêm</button></li>
+        <li><button id="btnDelete"><i class="fas fa-trash-alt"></i>Xóa</button></li>
+        <li><button id="btnEdit"><i class="fas fa-tools"></i>Sửa</button></li>
+
+        <!--<li>
+
+        <input type="text" id="myInputSearch" placeholder="Tiềm Kiếm....." title="Type in a name">
+        </li>-->
+
+
+    </ul>
+</div>
+<div class="grid">
+    <table class="tbData" id="tbKhachHang" border="1" cellpadding="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên Khách Hàng</th>
+                <th>Ngày Sinh</th>
+                <th>Địa Chỉ</th>
+                <th>Số Điện Thoại</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <h2>okok</h2>
+</div>
+
+<div class="dialog-modal">
+</div>
+<div class="dialog">
+    <div class="dialog-tittle">
+        <div class="tittle-text"><i class="fas fa-info-circle"></i>Thông Tin Khách Hàng</div>
+        <div class="tittle-button-close">
+            <i class="far fa-window-close"></i>
+        </div>
+    </div>
+    <div class="dialog-body">
+        <div class="dialog-input">
+            <i class="fas fa-user"></i>ID(*)
+            <input class="required valid-ID" id="txtCode" type="text" placeholder="ID Tự Sinh" autocomplete="off" />
+            <i class="fas fa-file-signature"></i>Tên Khách Hàng(*)
+            <input id="txtName" class="required valid-Name" type="text" placeholder="Tên" autocomplete="off" />
+            <i class="fas fa-birthday-cake"></i>Ngày Sinh
+            <input id="txtNgaySinh" class="required valid-Date" type="date" autocomplete="off" />
+            <i class="fas fa-map-marker-alt"></i>Địa Chỉ(*)
+            <input id="txtDiaChi" class="required valid-DiaChi" type="text" placeholder="Địa Chỉ" autocomplete="off" />
+            <i class="fas fa-envelope-square"></i>Email
+            <input id="txtEmail" class="required valid-Email" type="text" placeholder="Email" autocomplete="off" />
+            <i class="fas fa-phone-volume"></i>Số Điện Thoại(*)
+            <input id="txtSDT" class="required valid-SDT" type="text" placeholder="Số Điện Thoại" autocomplete="off" />
+        </div>
+    </div>
+    <div class="dialog-button">
+        <button id="btnSave">Lưu</button>
+        <button id="btnCancle">Thoắt</button>
+
+    </div>
+</div>
+
+<script src="~/Scripts/library js/Jquery/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/library js/datatable-js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/library js/datatable-js/dataTables.scrollResize.min.js"></script>
+<script src="~/Scripts/library js/File_export/dataTables.buttons.min.1.js"></script>
+<script src="~/Scripts/library js/File_export/buttons.flash.min.2.js"></script>
+<script src="~/Scripts/library js/File_export/jszip.min.3.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="~/Scripts/library js/File_export/vfs_fonts.5.js"></script>
+<script src="~/Scripts/library js/File_export/buttons.html5.min.6.js"></script>
+<script src="~/Scripts/library js/File_export/buttons.print.min.7.js"></script>
+<script src="~/Scripts/library js/File_export/buttons.colVis.min.8.js"></script>
+<script src="~/Scripts/library js/print-jquery/printThis.js"></script>
+<script src="~/Scripts/MyJavascript/KhachHang.js"></script>
+

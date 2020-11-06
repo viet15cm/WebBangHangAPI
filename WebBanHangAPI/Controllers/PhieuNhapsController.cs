@@ -52,6 +52,7 @@ namespace WebBanHangAPI.Controllers
         }
         */
         [Route("")]
+        
         public ICollection<PhieuNhap> GetphieuNhaps()
         {
             return db.phieuNhaps.ToList();
@@ -59,6 +60,7 @@ namespace WebBanHangAPI.Controllers
 
         // GET: api/PhieuNhaps/5
         [ResponseType(typeof(PhieuNhap))]
+        
         public IHttpActionResult GetPhieuNhap(string id)
         {
             PhieuNhap phieuNhap = db.phieuNhaps.Find(id);
@@ -71,6 +73,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/PhieuNhaps/5
+       
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPhieuNhap(string id, PhieuNhap phieuNhap)
         {
@@ -105,6 +108,7 @@ namespace WebBanHangAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
         //API them phieu nhap tu sinh code
+       
         [Route("PostPhieuNhapGetIdentity")]
         [ResponseType(typeof(PhieuNhap))]
         public IHttpActionResult PostPhieuNhapGetIdentity(PhieuNhap phieuNhap)
@@ -121,6 +125,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/PhieuNhaps
+        
         [ResponseType(typeof(PhieuNhap))]
         public IHttpActionResult PostPhieuNhap(PhieuNhap phieuNhap)
         {
@@ -151,6 +156,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // DELETE: api/PhieuNhaps/5
+        
         [ResponseType(typeof(PhieuNhap))]
         public IHttpActionResult DeletePhieuNhap(string id)
         {

@@ -29,9 +29,6 @@ class MyObject {
         $('#btnSave-PhieuNhap1').click(this.btnSavePhieuNhapOnclick1.bind(this));
         $('#btnComeBack-hide-PhieuNhap').click(this.btnComeBackPhieuNhapOnclick.bind(this));
         // $('#btnComeBack-hide-PhieuNhap1').click(this.btnComeBackPhieuNhapOnclick.bind(this));
-
-
-
         $('#btnCancle').click(this.btnCancleOnclick.bind(this));
         $('#btnSave').click(this.btnSaveOnclick.bind(this));
         $('.tittle-button-close').click(this.btnCancleOnclick.bind(this));
@@ -54,62 +51,18 @@ class MyObject {
 
         $(document).on('click', '#print-phieuNhap', function () {
 
+            if (typeof (Storage) !== 'undefined') {
+                var IDPN = $(this).closest("tr").find("td").eq(1).html();
+                sessionStorage.setItem('IDPN', IDPN);
+                var url = "https://localhost:44399/HTML/PhieuNhap.html";
+                window.open(url, '_blank');
+                window.focus();
+            } else {
+                alert("Trình Duyệt Đã Củ Bạn Can Nâng Cấp")
+            }
             
-            var ID = $(this).closest("tr").find("td").eq(1).html();
-          
-            //Lay Du lieu tren server thong qua loi goi api
-            $.ajax({
-
-                url: "https://localhost:44399/NhapKhoes/GetPhieuNhapsSanPhams/" + ID,
-                method: "GET",//put , pop , get,
-                contenType: "application/json",
-
-            }).done(function (response) {
-
-                debugger
-                $(".in-phieuNhap .grid tbody").empty();
-                var i = 0;
-                $.each(response, function (index, item) {
-                   
-                    var htmlObject = $(`<tr>
-                        <td>`+ i + `</td >
-                        <td>`+ item.IDSP + `</td>
-                        <td>`+ item.TenSP+ `</td>
-                        <td>`+ item.SoLuong + `</td>
-                        <td>`+ item.DonGia + `</td>
-                        
-                        </tr>`);
-                    $('.in-phieuNhap .grid tbody').append(htmlObject);
-                    i += 1;
-                });
-
-                $('.in-phieuNhap').printThis({
-                    debug: false,               // show the iframe for debugging
-                    importCSS: true,            // import parent page css
-                    importStyle: false,         // import style tags
-                    printContainer: true,       // print outer container/$.selector
-                    loadCSS: "",                // path to additional css file - use an array [] for multiple
-                    pageTitle: "fdsfdssd",              // add title to print page
-                    removeInline: true,        // remove inline styles from print elements
-                    removeInlineSelector: "",  // custom selectors to filter inline styles. removeInline must be true
-                    printDelay: 333,            // variable print delay
-                    header: null,               // prefix to html
-                    footer: null,               // postfix to html
-                    base: false,                // preserve the BASE tag or accept a string for the URL
-                    formValues: true,           // preserve input/form values
-                    canvas: false,              // copy canvas content
-                    doctypeString: '<!DOCTYPE html>',       // enter a different doctype for older markup
-                    removeScripts: false,       // remove script tags from print content
-                    copyTagClasses: false,      // copy classes from the html & body tag
-                    beforePrintEvent: null,     // function for printEvent in iframe
-                    beforePrint: null,          // function called before iframe is filled
-                    afterPrint: null            // function called before iframe is removed
-                });
-            }).fail(function () {
-
-                alert("Lỗi API")
-            });
-
+           
+            
            
 
         });
@@ -361,46 +314,41 @@ class MyObject {
         }
         else {
             $.ajax({
-                url: "https://localhost:44399/SanPhams",
+                url: "https://localhost:44399/NhapKhoes/GetPhieuNhapsSanPhams/" + row.data().IDPN,
                 method: "GET",
 
 
             }).done(function (response) {
-                const formatter = new Intl.NumberFormat('en-US', {
+                const formatter = new Intl.NumberFormat('de-DE', {
                     style: 'currency',
                     currency: 'VND',
-                    minimumFractionDigits: 2
+                    minimumFractionDigits: 0
                 })
                 var c = "";
                 for (var i = 0; i < response.length; i++) {
-                    debugger
-                    for (var j = 0; j < response[i].NhapKhos.length; j++) {
 
-                        if (response[i].NhapKhos[j].IDPN == row.data().IDPN) {
+                    c +='<tr>' +
+                        '<td>' + response[i].IDNK + '</td>' +
+                        '<td>' + '<img src ="' + response[i].Anh + '" style = "width: 30px; height: 30px;" />' + '</td>' +
+                        '<td>' + response[i].TenSP + '</td>' +
+                        '<td>' + formatter.format(response[i].DonGia) + '</td>' +
 
+                        '<td>' + response[i].SoLuong + '</td>' +
+                        '<td>' + formatter.format(response[i].ThanhTien) + '</td>' +
+                        '</tr>';
 
-                            c += '<tr>' +
-                                '<td>' + response[i].NhapKhos[j].IDNK + '</td>' +
-                                '<td>' + '<img src ="' + response[i].Anh + '" style = "width: 30px; height: 30px;" />' + '</td>' +
-                                '<td>' + response[i].TenSP + '</td>' +
-                                '<td>' + formatter.format(response[i].DonGia) + '</td>' +
-                                '<td>' + response[i].NgayCapNhat + '</td>' +
-                                '<td>' + response[i].NhapKhos[j].SoLuong + '</td>' +
-                                '</tr>';
-                        }
-
-                    }
                 }
 
                 debugger;
 
                 var table =
-                    ' < table cellpadding = "5" cellspacing = "0" border = "1" style = "margin-left: 100px;" > '
-                    + '<tr><th>IDNK</th><th>Ảnh</th><th>Tên Sản Phẩm</th><th>Đơn Giá</th><th>Ngày Cập Nhật</th><th>Số Lượng Nhập</th>' +
+                    '< table cellpadding = "5" cellspacing = "0" border = "1" style = "margin-left: 100px;" > '
+                    + '<tr><th>IDNK</th><th>Ảnh</th><th>Tên Sản Phẩm</th><th>Đơn Giá</th><th>Số Lượng </th><th>Thành Tiền</th>' +
 
                     c
                     + '</table>';
 
+                  
                 row.child(table).show();
 
                 tr.addClass('shown');
@@ -440,7 +388,6 @@ class MyObject {
             debugger
             $.each(listNhapKhos, function (index, item) {
 
-                
                 var htmlObject = $(`<tr>
 
                         <td>`+ item.IDNK + `</td >
@@ -455,9 +402,7 @@ class MyObject {
                 debugger;
                
             });
-
-       
-            
+ 
         }).fail(function () {
             debugger
             alert("Lỗi Sever API Hang Hoa");
@@ -500,7 +445,7 @@ class MyObject {
                         {
 
                             data: 'TongTien',
-                            render: $.fn.dataTable.render.number(',', '.', 2, '₫ ')
+                            render: $.fn.dataTable.render.number('.', ',', 0, '₫ ')
 
                         },
 

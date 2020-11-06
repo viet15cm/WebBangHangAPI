@@ -19,6 +19,7 @@ namespace WebBanHangAPI.Controllers
         private BanHangDBContext db = new BanHangDBContext();
 
         // GET: api/NhapHoaDons
+        
         [Route("")]
         public ICollection<NhapHoaDon> GetnhapHoaDons()
         {
@@ -26,6 +27,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // GET: api/NhapHoaDons/5
+        
         [ResponseType(typeof(NhapHoaDon))]
         public IHttpActionResult GetNhapHoaDon(string id)
         {
@@ -39,6 +41,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/NhapHoaDons/5
+        
         [ResponseType(typeof(void))]
         public IHttpActionResult PutNhapHoaDon(string id, NhapHoaDon nhapHoaDon)
         {
@@ -75,6 +78,7 @@ namespace WebBanHangAPI.Controllers
 
 
         //API them phieu nhap tu sinh code
+        
         [Route("PostNhapHoaDonGetIdentity")]
         [ResponseType(typeof(PhieuNhap))]
         public IHttpActionResult PostNhapHoaDonGetIdentity(NhapHoaDon nhapHoaDon)
@@ -91,6 +95,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/NhapHoaDons
+        
         [ResponseType(typeof(NhapHoaDon))]
         public IHttpActionResult PostNhapHoaDon(NhapHoaDon nhapHoaDon)
         {
@@ -121,6 +126,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // DELETE: api/NhapHoaDons/5
+        
         [ResponseType(typeof(NhapHoaDon))]
         public IHttpActionResult DeleteNhapHoaDon(string id)
         {

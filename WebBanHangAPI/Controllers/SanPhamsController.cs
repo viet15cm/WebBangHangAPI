@@ -21,7 +21,7 @@ namespace WebBanHangAPI.Controllers
     {
         private BanHangDBContext db = new BanHangDBContext();
 
-
+        
         [Route("getSanPhamsID/{key}")]
         public ICollection<SanPham> GetSanPhamsID(string key)
         {
@@ -31,13 +31,49 @@ namespace WebBanHangAPI.Controllers
 
             return matches.ToList();
         }
+       
+        [Route("getJoinSanPhamsNhapKhosPhieuNhaps")]
+        [ResponseType(typeof(SanPham))]
+        public IHttpActionResult getJoinSanPhamsNhapKhosPhieuNhaps()
+        {
+            var pnJoin = from pn in db.phieuNhaps
+                                     join nk in db.nhapKhos on pn.IDPN equals nk.IDPN
+                                     join sp in db.sanPhams on nk.IDSP equals sp.IDSP  
+                                     select new
+                                     {
+                                         IDPN = pn.IDPN,
+                                         IDNV = pn.IDNV,
+                                         IDNCC = pn.IDNCC,
+                                         IDNK = nk.IDNK,
+                                         IDSP = nk.IDSP,
+                                         NgayNhap = pn.NgayNhap,
+                                         SoLuong = nk.SoLuong,
+                                         TenSP = sp.TenSP,
+                                         DonGia = sp.DonGia,
+                                         TongTienSP = nk.SoLuong * sp.DonGia,
+                                         NgayCapNhat = sp.NgayCapNhat
+                                     };
+
+            var pnGroup = from pn in pnJoin.ToList()
+                          group pn by new { pn.IDPN, pn.IDNV, pn.IDNCC, pn.NgayNhap } into obGroup
+                          orderby obGroup.Key.IDPN, obGroup.Key.IDNV, obGroup.Key.IDNCC, obGroup.Key.NgayNhap
+                          select new
+                          {
+                              IDPN = obGroup.Key.IDPN,
+                              IDNV = obGroup.Key.IDNV,
+                              IDNCC = obGroup.Key.IDNCC,
+                              NgayNhap = obGroup.Key.NgayNhap,
+                              TongSoLuong = obGroup.Sum(x=> x.SoLuong),
+                              TongTien = obGroup.Sum(x => x.TongTienSP),
+                          };
+            return Ok(pnGroup.ToList());
+        }
         
         [Route("getJoinSanPhamsNhapKhos")]
         [ResponseType(typeof(SanPham))]
-       
         public IHttpActionResult getJoinSanPhamsNhapKhos()
         {
-            
+
             var pnJoin = from mh in db.matHangs
                          join sp in db.sanPhams on mh.IDMH equals sp.IDMH
                          join nk in db.nhapKhos on sp.IDSP equals nk.IDSP
@@ -51,7 +87,7 @@ namespace WebBanHangAPI.Controllers
                              TenSP = sp.TenSP,
                              DonGia = sp.DonGia,
                              Anh = sp.Anh,
-                             
+
                              NgayCapNhat = sp.NgayCapNhat,
                              SoLuong = nk.SoLuong,
                              TenMH = mh.TenMH
@@ -60,64 +96,19 @@ namespace WebBanHangAPI.Controllers
                          };
 
             var pnGroup = from sp in pnJoin.ToList()
-                          group sp by new { sp.IDMH, sp.IDSP, sp.Anh, sp.TenSP, sp.TenMH, sp.NgayCapNhat , sp.DonGia } into obGroup
-                          orderby obGroup.Key.IDSP, obGroup.Key.TenSP,  obGroup.Key.TenMH, obGroup.Key.NgayCapNhat, obGroup.Key.DonGia, obGroup.Key.Anh
+                          group sp by new { sp.IDMH, sp.IDSP, sp.Anh, sp.TenSP, sp.TenMH, sp.NgayCapNhat, sp.DonGia } into obGroup
+                          orderby obGroup.Key.IDSP, obGroup.Key.TenSP, obGroup.Key.TenMH, obGroup.Key.NgayCapNhat, obGroup.Key.DonGia, obGroup.Key.Anh
                           select new
                           {
                               IDMH = obGroup.Key.IDMH,
                               IDSP = obGroup.Key.IDSP,
                               TenSP = obGroup.Key.TenSP,
-                             
+
                               TenMH = obGroup.Key.TenMH,
                               DonGia = obGroup.Key.DonGia,
                               NgayCapNhat = obGroup.Key.NgayCapNhat,
                               Anh = obGroup.Key.Anh,
                               TongSoLuong = obGroup.Sum(x => x.SoLuong),
-                              TongTien = obGroup.Sum(x => x.DonGia),
-                          };
-         
-
-            return Ok(pnGroup.ToList());
-        }
-
-
-        [Route("getJoinSanPhamsNhapKhosPhieuNhaps")]
-        [ResponseType(typeof(SanPham))]
-        public IHttpActionResult getJoinSanPhamsNhapKhosPhieuNhaps()
-        {
-
-            var pnJoin = from pn in db.phieuNhaps
-                                     join nk in db.nhapKhos on pn.IDPN equals nk.IDPN
-                                     join sp in db.sanPhams on nk.IDSP equals sp.IDSP
-                                     
-                                   
-                                     
-                                     select new
-                                     {
-                                         IDPN = pn.IDPN,
-                                         IDNV = pn.IDNV,
-                                         IDNCC = pn.IDNCC,
-                                         IDNK = nk.IDNK,
-                                         IDSP = nk.IDSP,
-                                         NgayNhap = pn.NgayNhap,
-                                         SoLuong = nk.SoLuong,
-                                         TenSP = sp.TenSP,
-                                         DonGia = sp.DonGia,
-                                         NgayCapNhat = sp.NgayCapNhat
-                                        
-
-                                     };
-
-            var pnGroup = from pn in pnJoin.ToList()
-                          group pn by new { pn.IDPN, pn.IDNV, pn.IDNCC, pn.NgayNhap } into obGroup
-                          orderby obGroup.Key.IDPN, obGroup.Key.IDNV, obGroup.Key.IDNCC, obGroup.Key.NgayNhap
-                          select new
-                          {
-                              IDPN = obGroup.Key.IDPN,
-                              IDNV = obGroup.Key.IDNV,
-                              IDNCC = obGroup.Key.IDNCC,
-                              NgayNhap = obGroup.Key.NgayNhap,
-                              TongSoLuong = obGroup.Sum(x=> x.SoLuong),
                               TongTien = obGroup.Sum(x => x.DonGia),
                           };
 
@@ -134,9 +125,6 @@ namespace WebBanHangAPI.Controllers
             var joinSanPhams = new List<SanPhamMatHang>();
             using (var db = new BanHangDBContext())
             {
-
-               
-
                 var sp = db.sanPhams.ToList();
                 var mh = db.matHangs.ToList();
                 joinSanPhams = sp.Join(// outer sequence 
@@ -152,20 +140,18 @@ namespace WebBanHangAPI.Controllers
                           NgayCapNhat = sanpham.NgayCapNhat,
                           IDMH = mathang.IDMH,
                           TenMH = mathang.TenMH
-
-
                       })
                       .Where(x=>x.IDSP == id)
                       .ToList();
 
                 //sanPhamMatHang = joinSanPhams.Find(x => x.IDSP == id);
             }
-            
-
+           
             return Ok(joinSanPhams);
 
         }
 
+        
         [Route("getJoinSanPhamsMatHangs")]
 
         public IHttpActionResult GetJoinSanPhamsMatHangs()
@@ -187,7 +173,7 @@ namespace WebBanHangAPI.Controllers
                        };
             return Ok(join.ToList());
         }
-        
+        [Authorize(Roles = "Admin, SuperAdmin")]
         [Route("")]
         public ICollection<SanPham> GetsanPhams()
         {
@@ -195,6 +181,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // GET: api/SanPhams/5
+        
         [ResponseType(typeof(SanPham))]
         public IHttpActionResult GetSanPham(string id)
         {
@@ -208,6 +195,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/SanPhams/5
+        [Authorize(Roles = "Admin, SuperAdmin")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutSanPham(string id, SanPham sanPham)
         {
@@ -243,6 +231,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/SanPhams
+        [Authorize(Roles = "Admin, SuperAdmin")]
         [ResponseType(typeof(SanPham))]
         public IHttpActionResult PostSanPham(SanPham sanPham)
         {
@@ -273,6 +262,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // DELETE: api/SanPhams/5
+        
         [Route("Delete/{id}")]
         [ResponseType(typeof(SanPham))]
         public IHttpActionResult DeleteSanPham(string id)
@@ -297,7 +287,6 @@ namespace WebBanHangAPI.Controllers
             }
             base.Dispose(disposing);
         }
-
         private bool SanPhamExists(string id)
         {
             return db.sanPhams.Count(e => e.IDSP == id) > 0;

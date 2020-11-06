@@ -21,7 +21,7 @@ namespace WebBanHangAPI.Controllers
     {
        
         private BanHangDBContext db = new BanHangDBContext();
-
+       
         [Route("GetNhanVienID/{key}")]
         public ICollection<NhanVien> GetNhanVienID(string key)
         {
@@ -33,6 +33,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // GET: api/NhanViens
+        
         [ResponseType(typeof(int))]
         [Route("GetSoLuongNV")]
         public IHttpActionResult GetSoLuongNV()
@@ -43,13 +44,14 @@ namespace WebBanHangAPI.Controllers
                 return Ok(sl.Count);
             return Ok(0);
         }
-
+       
         public ICollection<NhanVien> GetnhanViens()
         {
             return db.nhanViens.ToList();
         }
 
         // GET: api/NhanViens/5
+        
         [ResponseType(typeof(NhanVien))]
         public IHttpActionResult GetNhanVien(string id)
         {
@@ -63,6 +65,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/NhanViens/5
+        
         [ResponseType(typeof(void))]
         public IHttpActionResult PutNhanVien(string id, NhanVien nhanVien)
         {
@@ -98,6 +101,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/NhanViens
+        
         [ResponseType(typeof(NhanVien))]
         public IHttpActionResult PostNhanVien(NhanVien nhanVien)
         {
@@ -128,6 +132,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // DELETE: api/NhanViens/5
+        
         [ResponseType(typeof(NhanVien))]
         public IHttpActionResult DeleteNhanVien(string id)
         {

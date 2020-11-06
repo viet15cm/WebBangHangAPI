@@ -27,7 +27,7 @@ namespace WebBanHangAPI.DataContextLayer
         public DbSet<PhieuNhap> phieuNhaps { get; set; }
         public DbSet<User> users { get; set; }
 
-
+        public DbSet<UserCustomer> UserCustomers { get; set; }
         public DbSet<HoaDon> hoaDons { get; set; }
         public DbSet<KhachHang> khachHangs { get; set; }
         public DbSet<NhapHoaDon> nhapHoaDons { get; set; }

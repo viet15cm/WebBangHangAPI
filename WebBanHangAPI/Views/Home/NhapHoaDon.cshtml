@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "NhapHoaDon";
+    Layout = "~/Views/Shared/_LayoutDesigner.cshtml";
+    <link href="~/Content/MyCss/NhapKhoConten_Left.css" rel="stylesheet" />
+    <link href="~/Scripts/library js/fontawesome-free-5.14.0-web/css/brands.css" rel="stylesheet" />
+    <link href="~/Scripts/library js/fontawesome-free-5.14.0-web/css/solid.css" rel="stylesheet" />
+}
+
+<div class="content-show">
+    <div class="menu-option">
+        <ul>
+
+            <li><button id="btnDelete"><i class="fas fa-trash-alt"></i>Xóa</button></li>
+            <li><button id="btnEdit"><i class="fas fa-tools"></i>Sửa</button></li>
+            <li><button id="btEdit-HoaDon"><i class="fas fa-paint-brush"></i>Tạo Hóa Đơn</button></li>
+            <!--<li>
+            <input type="text" id="myInputSearch" placeholder="Tiềm Kiếm....." title="Type in a name">
+            </li>-->
+
+
+        </ul>
+    </div>
+    <div class="grid">
+        <table class="tbData" id="tbNhapHoaDon" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>ID Khách Hàng</th>
+                    <th>ID Nhân Viên</th>
+                    <th>Ngày Lập</th>
+                    <th>Tổng Số Lượng</th>
+                    <th>Tổng Tiền Hóa Đơn</th>
+                    <th>In</th>
+
+
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+</div>
+<div class="content-hide">
+    <div class="menu-option">
+        <ul>
+
+            <li><i class="fas fa-cubes"></i>Chọn Sản Phẩm Vào Hóa Đơn : </li>
+
+            <li>
+                <!--<select id="listSP" class="required valid-List">
+                </select>-->
+                <input id="listSP" class="required valid-List" type="text" placeholder="Tên Sản Phẩm" autocomplete="off" />
+
+            </li>
+
+            <li>
+                <button id="btnSave-HoaDon"><i class="fas fa-cloud-download-alt"></i>Lưu</button>
+            </li>
+            <li>
+                <button id="btnComeBack-hide-HoaDon" data-url="@Url.Action("NhapHoaDon", "Home")"><i class="fas fa-share"></i>Quay Về</button>
+            </li>
+
+        </ul>
+    </div>
+    <div class="grid">
+        <table class="tbData" id="myInput">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Giá Bán</th>
+                    <th>Mặt Hàng</th>
+                    <th>Xóa</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="conten-input-hide">
+        <div class="conten-tiltle">
+            <h2><i class="fas fa-info-circle"></i>Nhập Thông Tin Hóa Đơn </h2>
+        </div>
+        <div class="conten-input">
+
+            <i class="fas fa-user-circle"></i>Nhân Viên(*)
+            <!--<select id="listNV" class="required valid-List" type="date" autocomplete="off">
+            </select>-->
+            <input id="listNV" class="required valid-List" type="text" autocomplete="off" placeholder="Tên Nhân Viên" />
+            <i class="fas fa-monument"></i>Khách Hàng(*)
+            <!-- <select id="listNCC" class="required valid-List" type="date" autocomplete="off">
+            </select>-->
+            <input id="listKH" class="required valid-List" type="text" autocomplete="off" placeholder="Tên Khách Hàng " />
+            <i class="fas fa-calendar-alt"></i>Ngày Nhập(*)
+            <input class="required valid-NgayNhap" id="datePhieuNhap" type="date" placeholder="Ngày Nhập" autocomplete="off" />
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/library js/Jquery/jquery-3.4.1.min.js"></script>
+
+<script src="~/Scripts/MyJavascript/NhapHoaDon.js"></script>
+
+

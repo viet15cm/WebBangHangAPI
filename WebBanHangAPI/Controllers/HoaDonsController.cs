@@ -18,6 +18,7 @@ namespace WebBanHangAPI.Controllers
     {
         private BanHangDBContext db = new BanHangDBContext();
 
+        
         [Route("")]
         public ICollection<HoaDon> GethoaDons()
         {
@@ -25,6 +26,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // Thêm Hóa Đơn Tự Sinh Code
+      
         [Route("PostHoaDonGetIdentity")]
         [ResponseType(typeof(HoaDon))]
         public IHttpActionResult PostHoaDonGetIdentity(HoaDon hoaDon)
@@ -39,6 +41,7 @@ namespace WebBanHangAPI.Controllers
 
             return Ok(hoaDon);
         }
+       
         // GET: api/HoaDons/5
         [ResponseType(typeof(HoaDon))]
         public IHttpActionResult GetHoaDon(string id)
@@ -53,6 +56,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/HoaDons/5
+        
         [ResponseType(typeof(void))]
         public IHttpActionResult PutHoaDon(string id, HoaDon hoaDon)
         {
@@ -88,6 +92,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/HoaDons
+       
         [ResponseType(typeof(HoaDon))]
         public IHttpActionResult PostHoaDon(HoaDon hoaDon)
         {
@@ -118,6 +123,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // DELETE: api/HoaDons/5
+       
         [ResponseType(typeof(HoaDon))]
         public IHttpActionResult DeleteHoaDon(string id)
         {

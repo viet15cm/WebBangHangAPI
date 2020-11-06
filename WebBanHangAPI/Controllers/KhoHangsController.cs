@@ -19,13 +19,14 @@ namespace WebBanHangAPI.Controllers
         private BanHangDBContext db = new BanHangDBContext();
 
         // GET: api/KhoHangs
-        
+       
         public ICollection<KhoHang> GetkhoHangs()
         {
             return db.khoHangs.ToList();
         }
 
         // GET: api/KhoHangs/5
+       
         [ResponseType(typeof(KhoHang))]
         public IHttpActionResult GetKhoHang(string id)
         {
@@ -39,6 +40,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/KhoHangs/5
+       
         [ResponseType(typeof(void))]
         public IHttpActionResult PutKhoHang(string id, KhoHang khoHang)
         {
@@ -74,6 +76,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/KhoHangs
+        
         [ResponseType(typeof(KhoHang))]
         public IHttpActionResult PostKhoHang(KhoHang khoHang)
         {
@@ -90,6 +93,7 @@ namespace WebBanHangAPI.Controllers
 
         // DELETE: api/KhoHangs/5
         [ResponseType(typeof(KhoHang))]
+       
         public IHttpActionResult DeleteKhoHang(string id)
         {
             KhoHang khoHang = db.khoHangs.Find(id);

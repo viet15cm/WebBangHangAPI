@@ -14,12 +14,13 @@ using WebBanHangAPI.Models.BasicAut;
 
 namespace WebBanHangAPI.Controllers
 {
-    [RoutePrefix("MatHangs")]
+    
     public class MatHangsController : ApiController
     {
         private BanHangDBContext db = new BanHangDBContext();
 
         // GET: api/MatHangs
+       
         [Route("getMatHangID/{key}")]
         public ICollection<MatHang> getMatHangID(string key)
         {
@@ -28,12 +29,15 @@ namespace WebBanHangAPI.Controllers
                            select mh;
             return matHangs.ToList();
         }
+        
+        
         public IHttpActionResult GetMatHang()
         {
             return Ok(db.matHangs.ToList());
         }
 
         // GET: api/MatHangs/5
+       
         [ResponseType(typeof(MatHang))]
         public IHttpActionResult GetMatHang(string id)
         {
@@ -47,6 +51,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/MatHangs/5
+       
         [ResponseType(typeof(void))]
         public IHttpActionResult PutMatHang(string id, MatHang matHang)
         {
@@ -82,6 +87,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/MatHangs
+        
         [ResponseType(typeof(MatHang))]
         public IHttpActionResult PostMatHang(MatHang matHang)
         {
@@ -112,6 +118,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // DELETE: api/MatHangs/5
+        
         [ResponseType(typeof(MatHang))]
         public IHttpActionResult DeleteMatHang(string id)
         {

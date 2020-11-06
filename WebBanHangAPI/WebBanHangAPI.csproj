@@ -193,6 +193,8 @@
     <Compile Include="Controllers\NhapKhoesController.cs" />
     <Compile Include="Controllers\PhieuNhapsController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
+    <Compile Include="Controllers\ShareOutSideController.cs" />
+    <Compile Include="Controllers\UserCustomersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -212,11 +214,21 @@
     <Compile Include="Migrations\202010240646437_ffffff5.designer.cs">
       <DependentUpon>202010240646437_ffffff5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010270605489_ssaadaa111111.cs" />
+    <Compile Include="Migrations\202010270605489_ssaadaa111111.designer.cs">
+      <DependentUpon>202010270605489_ssaadaa111111.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010290502222_saaaaaj111.cs" />
+    <Compile Include="Migrations\202010290502222_saaaaaj111.designer.cs">
+      <DependentUpon>202010290502222_saaaaaj111.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BasicAut\CustomerMasterRepository.cs" />
     <Compile Include="Models\BasicAut\MyAuthorizationServerProvider.cs" />
     <Compile Include="Models\BasicAut\Startup.cs" />
     <Compile Include="Models\BasicAut\UserMasterRepository.cs" />
     <Compile Include="Models\CookieAccout\TokenAccount.cs" />
+    <Compile Include="Models\UserCustomer.cs" />
     <Compile Include="Models\HoaDon.cs" />
     <Compile Include="Models\JoinModel\SanPhamMatHang.cs" />
     <Compile Include="Models\JoinModel\SanPhamNhapKho.cs" />
@@ -265,6 +277,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="HTML\PhieuNhap.html" />
+    <Content Include="IMAGES\logo.jpg" />
     <Content Include="Scripts\library js\autocomplete-js\css-ui-autocomplete.css" />
     <Content Include="Scripts\library js\autocomplete-js\jquery-ui-autocomplete.js" />
     <Content Include="Scripts\library js\datatable-js\css.dataTables.min.css" />
@@ -1929,7 +1942,10 @@
     <Content Include="Scripts\library js\Jquery\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\library js\Jquery\modernizr-2.8.3.js" />
     <Content Include="Scripts\library js\print-jquery\printThis.js" />
+    <Content Include="Scripts\MyJavascript\KhachHang.js" />
     <Content Include="Scripts\MyJavascript\Login.js" />
+    <Content Include="Scripts\MyJavascript\LoginCustomer.js" />
+    <Content Include="Scripts\MyJavascript\NhapHoaDon.js" />
     <Content Include="Scripts\MyJavascript\Register.js" />
     <Content Include="Scripts\MyJavascript\SanPham.js" />
     <Content Include="Scripts\MyJavascript\KhoHang.js" />
@@ -1937,7 +1953,7 @@
     <Content Include="Scripts\MyJavascript\NhaCungCap.js" />
     <Content Include="Scripts\MyJavascript\NhanVien.js" />
     <Content Include="Scripts\MyJavascript\NhapKho.js" />
-    <Content Include="Scripts\MyJavascript\text.js" />
+    <Content Include="Scripts\MyJavascript\printf-from\PhieuNhapKho.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1960,9 +1976,14 @@
     <Content Include="Views\Home\NhapKho.cshtml" />
     <Content Include="Views\Home\KhoHang.cshtml" />
     <Content Include="Views\Home\HoaDon.cshtml" />
+    <Content Include="Views\ShareOutSide\LoginCustomer.cshtml" />
+    <Content Include="Views\ShareOutSide\TrangChu.cshtml" />
+    <Content Include="Views\Home\KhachHang.cshtml" />
+    <Content Include="Views\Home\NhapHoaDon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\CustomerBasicAut\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -2032,6 +2053,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010240646437_ffffff5.resx">
       <DependentUpon>202010240646437_ffffff5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010270605489_ssaadaa111111.resx">
+      <DependentUpon>202010270605489_ssaadaa111111.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010290502222_saaaaaj111.resx">
+      <DependentUpon>202010290502222_saaaaaj111.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

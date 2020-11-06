@@ -19,7 +19,7 @@ namespace WebBanHangAPI.Controllers
     {
         private BanHangDBContext db = new BanHangDBContext();
 
-
+        
         [Route("GetNhaCungCapID/{key}")]
         public ICollection<NhaCungCap> GetNhaCungCapID(string key)
         {
@@ -30,12 +30,14 @@ namespace WebBanHangAPI.Controllers
             return matches.ToList();
         }
         // GET: api/NhaCungCaps
+        
         public ICollection<NhaCungCap> GetnhaCungCaps()
         {
             return db.nhaCungCaps.ToList();
         }
 
         // GET: api/NhaCungCaps/5
+       
         [ResponseType(typeof(NhaCungCap))]
         public IHttpActionResult GetNhaCungCap(string id)
         {
@@ -49,6 +51,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/NhaCungCaps/5
+       
         [ResponseType(typeof(void))]
         public IHttpActionResult PutNhaCungCap(string id, NhaCungCap nhaCungCap)
         {
@@ -84,6 +87,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/NhaCungCaps
+        
         [ResponseType(typeof(NhaCungCap))]
         public IHttpActionResult PostNhaCungCap(NhaCungCap nhaCungCap)
         {
@@ -114,6 +118,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // DELETE: api/NhaCungCaps/5
+       
         [ResponseType(typeof(NhaCungCap))]
         public IHttpActionResult DeleteNhaCungCap(string id)
         {
