@@ -2,7 +2,7 @@
 
 
 ### Chức năng đăng nhập
-![Image]('./Hinhchup/login1.png')
+![Image](Hinhchup/login1.png)
 
 Nếu đăng nhập thất bại, sẽ hiển thị giao diện
 
