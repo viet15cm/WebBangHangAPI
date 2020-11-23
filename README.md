@@ -106,6 +106,7 @@ Link tham Khảo :
 - <a href= "https://stackoverflow.com">stackoverflow.com</a>
 - <a href= "https://entityframework.net">entityframework.net</a>
 - <a href= "https://www.dotnettricks.com">www.dotnettricks.com</a>
+- <a href= "https://csharp-video-tutorials.blogspot.com">csharp-video-tutorials.blogspot.com/</a>
 
 ![image](https://github.com/viet15cm/BaiTap-Android/blob/master/viet.png)
 
