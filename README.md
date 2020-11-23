@@ -65,6 +65,7 @@ Nhập ID , tên, đơn giá..... của sản phẩm vào thanh search trên mà
 
 ### Chức Năng Đọc Ra File Excel PDF
 
-Kích vào nút Excel,  PDF được khoang trên màng hình để tải về danh sách sản phẩm
+Kích vào nút Excel,  PDF , printf được khoanh trên màng hình để tải về danh sách sản phẩm , và in ra
 
 ![Image](Hinhchup/Excel_PDF.png)
+![Image](Hinhchup/printf_1.png)
