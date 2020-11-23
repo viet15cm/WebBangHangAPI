@@ -69,3 +69,34 @@ Kích vào nút Excel,  PDF , printf được khoanh trên màng hình để t�
 
 ![Image](Hinhchup/Excel_PDF.png)
 ![Image](Hinhchup/printf_1.png)
+
+
+## Trang Kinh Doanh Sản Phẩm
+
+### Dao Diện Tổng Quan
+
+![Image](Hinhchup/DaoDienSanPham.png)
+
+### Chức Năng Lọc Sản Phẩm Theo Tên Mặt Hàng
+
+![Image](Hinhchup/LocMatHang.png)
+
+## Chức Năng Lọc Sản Phẩm Theo Hãng Sản Xuất
+
+![Image](Hinhchup/LocMatHangTheoHang.png)
+
+## Chức Năng Lọc Sản Phẩm Theo Giá Bán
+
+![Image](Hinhchup/LocGiaBan.png)
+
+## Chức Năng Tiềm Kiếm Sản Phẩm Theo Tên
+
+![Image](Hinhchup/timkiemTheoten.png)
+
+## Chức Năng Hiển Thị Chi Tiết Sản Phẩm Thêm Vào Giỏ Hàng
+
+![Image](Hinhchup/showSP.png)
+
+![Image](Hinhchup/ShowSP_2.png)
+
+
