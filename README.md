@@ -55,4 +55,10 @@ Chọn một row bất kì bấm vào nút Xóa được khoang tròn để xóa
 
 ![Image](Hinhchup/deleteSP.png)
 
+### Chức năng tìm kiếm nhiều tiêu chí
 
+Nhập ID , tên, đơn giá..... của sản phẩm vào thanh search trên màng hình để tìm kiếm kết quả mong muốn
+
+![Image](Hinhchup/search_Name.png)
+
+![Image](Hinhchup/Search_ID.png)
