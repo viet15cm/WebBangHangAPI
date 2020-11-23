@@ -62,3 +62,9 @@ Nhập ID , tên, đơn giá..... của sản phẩm vào thanh search trên mà
 ![Image](Hinhchup/search_Name.png)
 
 ![Image](Hinhchup/Search_ID.png)
+
+### Chức Năng Đọc Ra File Excel PDF
+
+Kích vào nút Excel,  PDF được khoang trên màng hình để tải về danh sách sản phẩm
+
+![Image](Hinhchup/Excel_PDF.png)
