@@ -35,17 +35,24 @@ Bấm vào nút Lưu khoang tròn để thêm sản phẩm
 
 ![Image](Hinhchup/ThemSanPham_4.png)
 
-- Chức năng sữa
+- Chức năng Sửa
 
-Chọn vào một row bất kỳ, bấm nút Sữa được khoanh trên màn hình 
+Chọn vào một row bất kỳ, bấm nút Sửa được khoanh trên màn hình 
 
 ![Image](Hinhchup/Edit_SanPham_1.png)
 
-Sữa đơn giá được khoanh đỏ trên màng hình
+Sửa đơn giá được khoanh đỏ trên màng hình
 
 ![Image](Hinhchup/Edit_SanPham_2.png)
 
 Bấm vào nút Lưu xem kết quả
 
 ![Image](Hinhchup/Edit_SanPham_3.png)
+
+- Chức năng xóa
+
+Chọn một row bất kì bấm vào nút Xóa được khoang tròn để xóa mục ra khỏi csdl
+
+![Image](Hinhchup/deleteSP.png)
+
 
