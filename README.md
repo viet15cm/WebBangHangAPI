@@ -103,9 +103,9 @@ Kích vào nút Excel,  PDF , printf được khoanh trên màng hình để t�
 
 © 2020 Copyright by Viet - All Rights Reserved | Designed by Viet
 Link tham Khảo : 
-- <a href ="https://stackoverflow.com"></a>
-- <a href ="https://entityframework.net"></a>
-- <a href ="https://www.dotnettricks.com"></a>
+- <a href= "https://stackoverflow.com"></a>
+- <a href= "https://entityframework.net"></a>
+- <a href= "https://www.dotnettricks.com"></a>
 
 ![image](https://github.com/viet15cm/BaiTap-Android/blob/master/viet.png)
 
