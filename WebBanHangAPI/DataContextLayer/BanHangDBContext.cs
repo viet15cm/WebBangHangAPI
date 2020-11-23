@@ -31,6 +31,11 @@ namespace WebBanHangAPI.DataContextLayer
         public DbSet<HoaDon> hoaDons { get; set; }
         public DbSet<KhachHang> khachHangs { get; set; }
         public DbSet<NhapHoaDon> nhapHoaDons { get; set; }
+        public DbSet<HangSX> hangSXs { get; set; }
+        
+        public DbSet<TSDienThoai> tSDienThoais { get; set; }
+        public DbSet<TSDongHo> tSDongHos { get; set; }
+
         public object User { get; internal set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

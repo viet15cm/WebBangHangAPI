@@ -13,6 +13,7 @@ using WebBanHangAPI.DataContextLayer;
 using WebBanHangAPI.Models;
 using WebBanHangAPI.Models.BasicAut;
 using WebBanHangAPI.Models.JoinModel;
+using WebBanHangAPI.Models.mvcModels;
 
 namespace WebBanHangAPI.Controllers
 {
@@ -30,6 +31,52 @@ namespace WebBanHangAPI.Controllers
                           select m;
 
             return matches.ToList();
+        }
+
+        [Route("GetJonSanPhamHangSanXuat")]
+        public IHttpActionResult GetFindMatHang()
+        {
+            var join = from hsx in db.hangSXs
+                       join sp in db.sanPhams on hsx.IDHSX equals sp.IDHSX
+                       
+                       select new
+                       {
+                           IDSP = sp.IDSP,
+                           TenSP = sp.TenSP,
+                           NgayCapNhat = sp.NgayCapNhat,
+                           DonGia = sp.DonGia,
+                           Anh = sp.Anh,
+                           IDMH = sp.IDMH,
+                           IDHSX = sp.IDHSX,
+                           TenHSX = hsx.TenHSX
+
+                       };
+
+
+            return Ok(join.ToList());
+        }
+
+        [Route("GetFindMatHang/{id}")]
+        public IHttpActionResult GetFindMatHang(string id)
+        {
+            var join = from hsx in db.hangSXs
+                       join sp in db.sanPhams on hsx.IDHSX equals sp.IDHSX
+                       where sp.IDMH == id
+                       select new
+                       {
+                           IDSP = sp.IDSP,
+                           TenSP = sp.TenSP,
+                           NgayCapNhat = sp.NgayCapNhat,
+                           DonGia = sp.DonGia,
+                           Anh = sp.Anh,
+                           IDMH = sp.IDMH,
+                           IDHSX = sp.IDHSX,
+                           TenHSX = hsx.TenHSX
+
+                       };
+           
+
+            return  Ok(join.ToList());
         }
        
         [Route("getJoinSanPhamsNhapKhosPhieuNhaps")]
@@ -135,7 +182,7 @@ namespace WebBanHangAPI.Controllers
                       {
                           IDSP = sanpham.IDSP,
                           TenSP = sanpham.TenSP,
-                        
+                          IDHSX = sanpham.IDHSX,
                           DonGia = sanpham.DonGia,
                           NgayCapNhat = sanpham.NgayCapNhat,
                           IDMH = mathang.IDMH,
@@ -167,13 +214,14 @@ namespace WebBanHangAPI.Controllers
                            TenSP = sp.TenSP,
                            DonGia = sp.DonGia,
                            Anh = sp.Anh,
+                           IDHSX = sp.IDHSX,
                            GiaBan = sp.DonGia + (sp.DonGia * 10 / 100) + (sp.DonGia * 30 / 100) + (sp.DonGia *  (slnv * 1.2m * 10/100)),
                            NgayCapNhat = sp.NgayCapNhat,
                            TenMH = mh.TenMH
                        };
             return Ok(join.ToList());
         }
-        [Authorize(Roles = "Admin, SuperAdmin")]
+       
         [Route("")]
         public ICollection<SanPham> GetsanPhams()
         {
@@ -181,7 +229,36 @@ namespace WebBanHangAPI.Controllers
         }
 
         // GET: api/SanPhams/5
+        [Route("GetFindSanPhamMatHangHangSX/{id}")]
+        [ResponseType(typeof(mvcSanPhamMatHangHSX))]
+        public IHttpActionResult GetFindSanPhamMatHangHangSX(string id)
+        {
+
+
+            mvcSanPhamMatHangHSX join = (from mh in db.matHangs
+                                         join sp in db.sanPhams on mh.IDMH equals sp.IDMH
+                                         join hsx in db.hangSXs on sp.IDHSX equals hsx.IDHSX
+                                         where (sp.IDSP == id)
+                                         select new mvcSanPhamMatHangHSX()
+                                         {
+                                             IDSP = sp.IDSP,
+                                             TenSP = sp.TenSP,
+                                             DonGia = sp.DonGia,
+                                             Anh = sp.Anh,
+
+                                             NgayCapNhat = sp.NgayCapNhat,
+                                             IDMH = mh.IDMH,
+                                             TenMH = mh.TenMH,
+                                             IDHSX = hsx.IDHSX,
+                                             TenHSX = hsx.TenHSX
+                                         }).FirstOrDefault(); ;
+               
+                return Ok(join);
+ 
+        }
+
         
+        [Route("GetSanPham/{id}")]
         [ResponseType(typeof(SanPham))]
         public IHttpActionResult GetSanPham(string id)
         {
@@ -195,7 +272,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // PUT: api/SanPhams/5
-        [Authorize(Roles = "Admin, SuperAdmin")]
+       
         [ResponseType(typeof(void))]
         public IHttpActionResult PutSanPham(string id, SanPham sanPham)
         {
@@ -231,7 +308,7 @@ namespace WebBanHangAPI.Controllers
         }
 
         // POST: api/SanPhams
-        [Authorize(Roles = "Admin, SuperAdmin")]
+        
         [ResponseType(typeof(SanPham))]
         public IHttpActionResult PostSanPham(SanPham sanPham)
         {

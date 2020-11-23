@@ -1,0 +1,109 @@
+﻿@model Tuple<WebBanHangAPI.Models.mvcModels.mvcSanPhamMatHangHSX, WebBanHangAPI.Models.mvcModels.mvcTSDienThoai, WebBanHangAPI.Models.mvcModels.mvcTSDongHo >
+@{
+    ViewBag.Title = "ShowProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    <link href="~/Scripts/Library_js/fontawesome-free-5.14.0-web/css/all.min.css" rel="stylesheet" />
+    <style>
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+}
+
+<div class="container">
+    <div class="header" style="width: 100%; height: 50px;">
+        <h4>@Model.Item1.TenMH > @Model.Item1.TenHSX</h4>
+
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+
+            <img src="@Model.Item1.Anh" style="width: 100% ; height: 500px;" />
+        </div>
+        <div class="col-md-7">
+
+            <h4>@Model.Item1.TenSP</h4>
+            <div>
+                <h2 id="enMoney"></h2>
+                
+                <table style="width: 100%; font-family: arial, sans-serif;">
+                    @if (Model.Item1.IDMH == "DT000")
+                    {
+                        <tr>
+                            <td>Màng hình</td>
+                            <td>@Model.Item2.MangHinh</td>
+                        </tr>
+                        <tr>
+                            <td>Hệ điều hành.</td>
+                            <td>@Model.Item2.HeDieuHanh</td>
+                        </tr>
+                        <tr>
+                            <td>Camera sau</td>
+                            <td>@Model.Item2.CameraRaSau</td>
+                        </tr>
+                        <tr>
+                            <td>Camera trước</td>
+                            <td>@Model.Item2.CaMeraTruoc</td>
+                        </tr>
+                        <tr>
+                            <td>Dung Lượng pin</td>
+                            <td>@Model.Item2.DungLuongPin</td>
+                        </tr>
+                        <tr>
+                            <td>Thẻ nhớ</td>
+                            <td>@Model.Item2.TheNho</td>
+                        </tr>
+                        <tr>
+                            <td>CPU</td>
+                            <td>@Model.Item2.CPU</td>
+                        </tr>
+                    }
+                    @if (Model.Item1.IDMH == "ML000")
+                    {
+                        <tr>
+                            <td>Đường kính</td>
+                            <td>@Model.Item3.DuongKinh</td>
+                        </tr>
+                        <tr>
+                            <td>Chất liệu dây</td>
+                            <td>@Model.Item3.ChatLieuDay</td>
+                        </tr>
+                        <tr>
+                            <td>Độ rộng dây</td>
+                            <td>@Model.Item3.DoRongDay</td>
+                        </tr>
+                        <tr>
+                            <td>Chống nước</td>
+                            <td>@Model.Item3.ChongNuoc</td>
+                        </tr>
+                        <tr>
+                            <td>Chất liệu mặt</td>
+                            <td>@Model.Item3.ChatLieuMat</td>
+                        </tr>
+                        <tr>
+                            <td>Gới tính</td>
+                            <td>@Model.Item3.GoiTinh</td>
+                        </tr>
+                        <tr>
+                            <td>Thời gian pin</td>
+                            <td>@Model.Item3.ThoiGianPin</td>
+                        </tr>
+                      
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var x = @Model.Item1.DonGia;
+        x = x.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+        
+        document.getElementById('enMoney').innerHTML = x;
+    </script>
+}

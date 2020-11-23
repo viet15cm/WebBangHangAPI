@@ -66,7 +66,7 @@ class MyObject {
 
         $(function () {
             temp.getAutocompleteIDMH();
-            
+            temp.getAutocompleteIDHSX();
         })
        
 
@@ -112,6 +112,55 @@ class MyObject {
             select: function (event, ui) {
 
                 $("#listMNH").val(ui.item.value);
+                debugger
+                return false;
+            },
+            messages: {
+                noResults: '',
+                results: function () { }
+            }
+
+        });
+    }
+
+    getAutocompleteIDHSX() {
+        var temp = this;
+        var id = null;
+        $("#listHSX").autocomplete({
+
+            source: function (request, response) {
+                debugger
+                $.ajax({
+                    url: "https://localhost:44399/HangSXs/GetAutoCompleteID/" + request.term,
+                    method: "GET",
+                    headers: {
+                        "Authorization": 'Bearer ' + temp.tooken
+                    }
+
+
+                }).done(function (data) {
+                    debugger;
+                    /*  var object = [];
+                      for (var i = 0; i < data.length; i++) {
+                          var value = data[i].TenMH + " - " + data[i].IDMH;
+                          id = data[i].IDMH;
+                          object.push(value);
+  
+                      }
+                      debugger;
+                    */
+                    response($.map(data, function (objet) {
+                        return {
+                            label: objet.TenHSX + " - " + objet.IDHSX,
+                            value: objet.IDHSX,
+                        };
+                    }));
+
+                })
+            },
+            select: function (event, ui) {
+
+                $("#listHSX").val(ui.item.value);
                 debugger
                 return false;
             },
@@ -238,10 +287,10 @@ class MyObject {
                                     if (data == null) {
                                         return "";
                                     }
-                                    debugger;
+                                 
                                     return '<img class="img-responsive" src="' + data + '" alt="Product_Image"'
                                         + 'height = "50px" width = "50px" /> ';
-                                    debugger
+                                    
                                 }
                             },
 
@@ -257,6 +306,18 @@ class MyObject {
                             },
                             { data: 'NgayCapNhat' },
                             { data: 'TenMH' },
+                            {
+                                data: 'IDHSX',
+                                
+                                render: function (data, type, row, meta) {
+                                    if (data == null) {
+                                        return "";
+                                    }
+                                    debugger;
+                                    return data;
+                                    
+                                }
+                            },
 
                         ],
                         "order": [
@@ -404,7 +465,7 @@ class MyObject {
         if (temp.getObjectCode() != null) {
             temp.showDialogDetail();
             $.ajax({
-                url: "https://localhost:44399/api/SanPhams/" + temp.getObjectCode(),
+                url: "https://localhost:44399/SanPhams/GetSanPham/" + temp.getObjectCode(),
                 method: "GET",
                 headers: {
                     "Authorization": 'Bearer ' + temp.tooken
@@ -433,7 +494,8 @@ class MyObject {
 
                     $("#txtNgayNhap").val(temp.date(res.NgayCapNhat));
                     $("#listMNH").val(res.IDMH);
-                    $("#listMNH").val(res.IDMH);
+                    $("#listHSX").val(res.IDHSX);
+                    $("#listHSX").val(res.IDHSX);
 
                     return img;
                     debugger
@@ -478,6 +540,7 @@ class MyObject {
         object.GiaBan = String(giaBan);
         object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
         object.IDMH = $("#listMNH").val();
+        object.IDHSX = $("#listHSX").val();
         object.Anh = fr.result.toString();
         debugger
         $.ajax({
@@ -514,6 +577,7 @@ class MyObject {
         object.GiaBan = String(giaBan);
         object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
         object.IDMH = $("#listMNH").val();
+        object.IDHSX = $("#listHSX").val();
         object.Anh = fr.result.toString();
         debugger
 
@@ -572,6 +636,7 @@ class MyObject {
                         object.DonGia = $("#txtDonGia").val();                        
                         object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
                         object.IDMH = $("#listMNH").val();
+                        object.IDHSX = $("#listHSX").val();
                         object.Anh = fr.result.toString();
                         
                         debugger
@@ -610,6 +675,7 @@ class MyObject {
                         object.TenSP = $("#txtName").val();
                         object.DonGia = $("#txtDonGia").val();                        
                         object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
+                        object.IDHSX = $("#listHSX").val();
                         object.IDMH = $("#listMNH").val();
 
                         debugger
@@ -654,6 +720,7 @@ class MyObject {
                         object.DonGia = $("#txtDonGia").val();                       
                         object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
                         object.IDMH = $("#listMNH").val();
+                        object.IDHSX = $("#listHSX").val();
                         object.Anh = fr.result.toString();
                         debugger
 
@@ -694,6 +761,7 @@ class MyObject {
                         object.DonGia = $("#txtDonGia").val();                       
                         object.NgayCapNhat = $("#txtNgayNhap").val() + temp.newTime();
                         object.IDMH = $("#listMNH").val();
+                        object.IDHSX = $("#listHSX").val();
                         object.Anh = $("#displayimg img").attr('src');
                         debugger
                        

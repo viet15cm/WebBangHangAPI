@@ -14,7 +14,7 @@ using WebBanHangAPI.Models.BasicAut;
 
 namespace WebBanHangAPI.Controllers
 {
-    
+    [RoutePrefix("MatHangs")]
     public class MatHangsController : ApiController
     {
         private BanHangDBContext db = new BanHangDBContext();
@@ -30,7 +30,7 @@ namespace WebBanHangAPI.Controllers
             return matHangs.ToList();
         }
         
-        
+        [Route("")]
         public IHttpActionResult GetMatHang()
         {
             return Ok(db.matHangs.ToList());

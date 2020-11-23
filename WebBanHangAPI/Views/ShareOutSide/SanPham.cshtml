@@ -1,0 +1,440 @@
+﻿@model Tuple<IEnumerable<WebBanHangAPI.Models.mvcModels.mvcSanPhamHangSanXuat>, IEnumerable<WebBanHangAPI.Models.mvcModels.mvcMathang>, IEnumerable<WebBanHangAPI.Models.mvcModels.mvcHangSanXuat>>
+@{
+    ViewBag.Title = "SanPham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Scripts/Library_js/fontawesome-free-5.14.0-web/css/all.min.css" rel="stylesheet" />
+
+    <link href="~/Scripts/MyJavascript/Pageding/Pageding.css" rel="stylesheet" />
+    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+    serializer.MaxJsonLength = Int32.MaxValue;
+    var jsonModel = serializer.Serialize(Model.Item1);
+}
+
+<div class="row" id="header" style="width: 100%; height: 50px;">
+
+    <div class="col-md-2">
+        
+    </div>
+    <div class="HangSX col-md-10" style="margin-top: 10px;">
+
+        <ul class="" id="hangSX">
+            @foreach (var item in Model.Item3)
+            {
+                <li  class="list-group-item">@item.TenHSX</li>
+            }
+        </ul>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2" style="background: #808080;">
+        <h4><i class="fas fa-caret-square-down"></i> Măt Hàng</h4>
+        <div class="list-group">
+            
+           
+            @foreach (var item in Model.Item2)
+            {
+              
+                <a href="@Url.Action("SanPham", "ShareOutSide", new { id = @item.IDMH })" class="list-group-item">@item.TenMH</a>
+               
+            }
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="content" >
+                <div class="container">
+                    <div class="content__search" >
+                        <input class="form-control" type="text" placeholder="Nhập vào đây">
+                        <button class="btn btn-primary" id="search">Search</button>
+                        <select   class="form-control" name="cars" id="seletGiaban">
+                            <option value="0">---- Chọn Giá Bán ---</option>
+                            <option value="1">3 triệu trở xuống</option>
+                            <option value="2">từ 3 triệu tới 5 triệu</option>
+                            <option value="3">từ 5 triệu tới 10 triệu </option>
+                            <option value="4">10 triệu trở lên</option>
+                        </select>
+                    </div>
+
+                    <div class="content__product" id="product">
+                        <!-- <div class="content__product__item">
+                            <a href="">
+                                <img src="" alt="">
+                            </a>
+                            <h3></h3>
+                        </div> -->
+                    </div>
+                    <div class="no-result">Không có kết quả tìm kiếm</div>
+                    <div class="content__paging">
+                        <div class="page">
+                            <ul>
+                                <li class="btn-prev btn-active fas fa-angle-left"></li>
+                                <div class="number-page" id="number-page">
+
+                                </div>
+
+                                <li class="btn-next fas fa-angle-right"></li>
+                            </ul>
+                        </div>
+                        <div class="page-config">
+                            <label for="">Item per page: </label>
+                            <select name="" id="mySelect">
+                                <option value="3">3</option>
+                                <option value="6" selected>6</option>
+                                <option value="9">9</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="total-page"></div>
+                        <div class="total-item"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        let perPage = 6;
+        let idPage = 1;
+        let start = 0;
+        let end = perPage;
+
+        const product = @Html.Raw(jsonModel);
+
+        const formatter = new Intl.NumberFormat('de-DE', {
+            style: 'currency',
+            currency: 'VND',
+            minimumFractionDigits:0
+        })
+        debugger;
+
+        let productArr = [];
+        let showAdd = false;
+
+        function highlightText() {
+            const title = document.querySelectorAll('.content__product__item h5');
+            title.forEach((title, index) => {
+                let titleText = title.innerHTML;
+                let indexOf = Number(titleText.toLocaleLowerCase().indexOf(searchText.value.toLocaleLowerCase()));
+                let searchTextLength = searchText.value.length;
+                titleText = titleText.substring(0, indexOf) + "<span class='highlight'>" + titleText.substring(indexOf, indexOf + searchTextLength) + "</span>" + titleText.substring(indexOf + searchTextLength, titleText.length);
+                title.innerHTML = titleText;
+                console.log(titleText);
+            })
+        }
+
+
+        productArr = product;
+
+
+        const pageConfig = document.querySelector('.page-config select');
+        const mySelect = document.getElementById('mySelect');
+        const countTotalPage = document.querySelector('.total-page');
+        const countTotalProduct = document.querySelector('.total-item');
+
+        let totalPages = Math.ceil(productArr.length / perPage);
+        const searchText = document.querySelector('.content__search input');
+        const searchBtn = document.getElementById('search');
+       
+
+
+        function initRender(productAr, totalPage) {
+            renderProduct(productAr);
+            renderListPage(totalPage);
+        }
+
+        initRender(productArr, totalPages);
+
+        function getCurrentPage(indexPage) {
+            start = (indexPage - 1) * perPage;
+            end = indexPage * perPage;
+            totalPages = Math.ceil(productArr.length / perPage);
+            countTotalPage.innerHTML = `Total pages: ${totalPages}`;
+            countTotalProduct.innerHTML = `Total Product:  ${productArr.length}`
+        }
+
+        const deleteBtn = document.querySelectorAll('.content__product__item .delete');
+
+        deleteBtn.forEach((item, index) => {
+            deleteBtn[index].addEventListener('click', () => {
+                product.splice(index, 1);
+                productArr = product;
+                renderProduct(productArr)
+            });
+        });
+
+        getCurrentPage(1);
+
+        searchBtn.addEventListener('click', () => {
+            idPage = 1;
+            productArr = [];
+            product.forEach((item, index) => {
+                if (item.TenSP.toLocaleLowerCase().indexOf(searchText.value.toLocaleLowerCase()) != -1) {
+                    productArr.push(item);
+                }
+            });
+            if (productArr.length === 0) {
+                $('.no-result').css('display', 'block')
+            } else {
+                $('.no-result').css('display', 'none')
+            }
+            getCurrentPage(idPage);
+            initRender(productArr, totalPages);
+            changePage();
+            if (totalPages <= 1) {
+                $('.btn-prev').addClass('btn-active');
+                $('.btn-next').addClass('btn-active');
+            } else {
+                $('.btn-next').removeClass('btn-active');
+            }
+        });
+
+        searchText.addEventListener("keyup", (event) => {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                searchBtn.click();
+            }
+        });
+
+
+
+        pageConfig.addEventListener('change', () => {
+            idPage = 1;
+            perPage = Number(pageConfig.value);
+            getCurrentPage(idPage);
+            initRender(productArr, totalPages);
+            if (totalPages == 1) {
+                $('.btn-prev').addClass('btn-active');
+                $('.btn-next').addClass('btn-active');
+            } else {
+                $('.btn-next').removeClass('btn-active');
+            }
+            changePage();
+        });
+
+
+
+        function renderProduct(product) {
+            html = '';
+            const content = product.map((item, index) => {
+
+                var myUrl = '@Url.Action("ShowProduct", "ShareOutSide")/' + item.IDSP + "?" + "idmh=" + item.IDMH;
+
+                if (index >= start && index < end) {
+                    html += '<div class="content__product__item">';
+                    html += '<a id="img">';
+                    html += '<img src=' + item.Anh + '>';
+                    html += '</a>';
+                    html += '<h5>' + item.TenSP + '</h5>';
+                    html += '<p>' + formatter.format(item.DonGia) + '</p>';
+                    html += '<a href=\"' + myUrl + '\" class=\"btn btn-default btn-sm\"><i class="fas fa-cart-plus"></i> Đặt Hàng</a>';
+                    html += '</div>';
+                    return html;
+                }
+            });
+            
+            document.getElementById('product').innerHTML = html;
+            highlightText();
+        }
+
+        function renderListPage(totalPages) {
+            let html = '';
+            html += `<li class="current-page active"><a>${1}</a></li>`;
+            for (let i = 2; i <= totalPages; i++) {
+                html += `<li><a>${i}</a></li>`;
+            }
+            if (totalPages === 0) {
+                html = ''
+            }
+            document.getElementById('number-page').innerHTML = html;
+        }
+
+        function changePage() {
+            const idPages = document.querySelectorAll('.number-page li');
+            const a = document.querySelectorAll('.number-page li a');
+            for (let i = 0; i < idPages.length; i++) {
+                idPages[i].onclick = function () {
+                    let value = i + 1;
+                    const current = document.getElementsByClassName('active');
+                    current[0].className = current[0].className.replace('active', '');
+                    this.classList.add('active');
+                    if (value > 1 && value < idPages.length) {
+                        $('.btn-prev').removeClass('btn-active');
+                        $('.btn-next').removeClass('btn-active');
+                    }
+                    if (value == 1) {
+                        $('.btn-prev').addClass('btn-active');
+                        $('.btn-next').removeClass('btn-active');
+                    }
+                    if (value == idPages.length) {
+                        $('.btn-next').addClass('btn-active');
+                        $('.btn-prev').removeClass('btn-active');
+                    }
+                    idPage = value;
+                    getCurrentPage(idPage);
+                    renderProduct(productArr);
+                };
+            }
+        }
+
+        changePage();
+
+        $('.btn-next').on('click', () => {
+            idPage++;
+            if (idPage > totalPages) {
+                idPage = totalPages;
+            }
+            if (idPage == totalPages) {
+                $('.btn-next').addClass('btn-active');
+            } else {
+                $('.btn-next').removeClass('btn-active');
+            }
+            console.log(idPage);
+            const btnPrev = document.querySelector('.btn-prev');
+            btnPrev.classList.remove('btn-active');
+            $('.number-page li').removeClass('active');
+            $(`.number-page li:eq(${idPage - 1})`).addClass('active');
+            getCurrentPage(idPage);
+            renderProduct(productArr);
+        });
+
+        $('.btn-prev').on('click', () => {
+            idPage--;
+            if (idPage <= 0) {
+                idPage = 1;
+            }
+            if (idPage == 1) {
+                $('.btn-prev').addClass('btn-active');
+            } else {
+                $('.btn-prev').removeClass('btn-active');
+            }
+            const btnNext = document.querySelector('.btn-next');
+            btnNext.classList.remove('btn-active');
+            $('.number-page li').removeClass('active');
+            $(`.number-page li:eq(${idPage - 1})`).addClass('active');
+            getCurrentPage(idPage);
+            renderProduct(productArr);
+        });
+
+        function getEventTarget(e) {
+            e = e || window.event;
+            return e.target || e.srcElement;
+        }
+
+        var ul = document.getElementById('hangSX');
+        ul.onclick = function (event) {
+            var target = getEventTarget(event).innerHTML;
+            debugger
+            idPage = 1;
+            productArr = [];
+            product.forEach((item, index) => {
+                debugger
+                if (item.TenHSX.toLocaleLowerCase().indexOf(target.toLocaleLowerCase()) != -1) {
+                    productArr.push(item);
+                }
+            });
+            if (productArr.length === 0) {
+                $('.no-result').css('display', 'block')
+            } else {
+                $('.no-result').css('display', 'none')
+            }
+            getCurrentPage(idPage);
+            initRender(productArr, totalPages);
+            changePage();
+            if (totalPages <= 1) {
+                $('.btn-prev').addClass('btn-active');
+                $('.btn-next').addClass('btn-active');
+            } else {
+                $('.btn-next').removeClass('btn-active');
+            }
+        };
+
+        // select gia ban
+        document.getElementById('seletGiaban').addEventListener('change', function () {
+            debugger
+            switch (this.value) {
+               
+                case "0":
+                   
+                    return;
+                case "1":
+                    debugger
+                    productArr = [];
+                    product.forEach((item, index) => {
+                        debugger
+                        if (item.DonGia > 0 && item.DonGia <= 3000000) {
+                            productArr.push(item);
+                        }
+                    });
+
+                    selectGiaBanShow();
+                    break;
+
+                case "2":
+                    productArr = [];
+                    product.forEach((item, index) => {
+                        debugger
+                        if (item.DonGia > 3000000 && item.DonGia <= 5000000) {
+                            productArr.push(item);
+                        }
+                    });
+                    selectGiaBanShow();
+                    break;
+                case "3":
+                    productArr = [];
+                    product.forEach((item, index) => {
+                        debugger
+                        if (item.DonGia > 5000000 && item.DonGia <= 10000000) {
+                            productArr.push(item);
+                        }
+                    });
+                    selectGiaBanShow();
+                    break;
+                case "4":
+                    productArr = [];
+                    product.forEach((item, index) => {
+                        debugger
+                        if (item.DonGia > 10000000) {
+                            productArr.push(item);
+                        }
+                    });
+                    selectGiaBanShow();
+                    break;
+                default:
+                    debugger
+                    return;
+            }
+        });
+
+        function selectGiaBanShow() {
+           
+            idPage = 1;
+            
+            if (productArr.length === 0) {
+                $('.no-result').css('display', 'block')
+            } else {
+                $('.no-result').css('display', 'none')
+            }
+            getCurrentPage(idPage);
+            initRender(productArr, totalPages);
+            changePage();
+            if (totalPages <= 1) {
+                $('.btn-prev').addClass('btn-active');
+                $('.btn-next').addClass('btn-active');
+            } else {
+                $('.btn-next').removeClass('btn-active');
+            }
+        }
+
+    </script>
+    
+   
+}
+
+

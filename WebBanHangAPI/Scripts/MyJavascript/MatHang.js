@@ -155,7 +155,7 @@ class MyObject {
         //Lay Du lieu tren server thong qua loi goi api
         $.ajax({
 
-            url: "https://localhost:44399/api/MatHangs",
+            url: "https://localhost:44399/MatHangs",
             method: "GET",//put , pop , get,
             data: "",// tham so truyenqua body repuest
             contenType: "application/json",

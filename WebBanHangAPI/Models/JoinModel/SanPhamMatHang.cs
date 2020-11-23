@@ -19,7 +19,7 @@ namespace WebBanHangAPI.Models.JoinModel
         public DateTime NgayCapNhat { get; set; }
 
         public string IDMH { get; set; }
-       
+        public string IDHSX { get; set; }
         public string TenMH { get; set; }
         public string Anh { get; set; }
         public float GiaBan { get; set; }

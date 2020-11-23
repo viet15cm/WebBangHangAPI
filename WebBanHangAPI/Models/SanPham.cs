@@ -8,22 +8,23 @@ using WebBanHangAPI.Controllers;
 
 namespace WebBanHangAPI.Models
 {
-    public class SanPham 
+    public class SanPham
     {
         [Key]
         [StringLength(10)]
         public string IDSP { get; set; }
         [Required]
         public string TenSP { get; set; }
-        
-        
+
+
         [Required]
         public decimal DonGia { get; set; }
-       
+
         public string Anh { get; set; }
         public DateTime NgayCapNhat { get; set; }
-       
+
         public string IDMH { get; set; }
+        public string IDHSX { get; set; }
         public virtual ICollection<NhapKho> NhapKhos { get; set; }
         public virtual ICollection<NhapHoaDon> NhapHoaDons { get; set; }
     }
